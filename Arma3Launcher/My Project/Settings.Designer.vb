@@ -422,6 +422,30 @@ Namespace My
                 Me("RunBattlEye") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property CustomArguments() As String
+            Get
+                Return CType(Me("CustomArguments"),String)
+            End Get
+            Set
+                Me("CustomArguments") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CustomArgumentsEnabled() As Boolean
+            Get
+                Return CType(Me("CustomArgumentsEnabled"),Boolean)
+            End Get
+            Set
+                Me("CustomArgumentsEnabled") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

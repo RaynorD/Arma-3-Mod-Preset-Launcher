@@ -46,12 +46,9 @@ Partial Class frmMain
 		Me.GroupBox2 = New System.Windows.Forms.GroupBox()
 		Me.txtCustomParameters = New System.Windows.Forms.TextBox()
 		Me.chkCustomArguments = New System.Windows.Forms.CheckBox()
-		Me.Label4 = New System.Windows.Forms.Label()
 		Me.chkProfileName = New System.Windows.Forms.CheckBox()
 		Me.chkCustomMemoryAllocator = New System.Windows.Forms.CheckBox()
-		Me.Label3 = New System.Windows.Forms.Label()
 		Me.cmbProfileName = New System.Windows.Forms.ComboBox()
-		Me.Label2 = New System.Windows.Forms.Label()
 		Me.cmbCustomMemoryAllocator = New System.Windows.Forms.ComboBox()
 		Me.chkWindowed = New System.Windows.Forms.CheckBox()
 		Me.Label1 = New System.Windows.Forms.Label()
@@ -341,12 +338,9 @@ Partial Class frmMain
 					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.GroupBox2.Controls.Add(Me.txtCustomParameters)
 		Me.GroupBox2.Controls.Add(Me.chkCustomArguments)
-		Me.GroupBox2.Controls.Add(Me.Label4)
 		Me.GroupBox2.Controls.Add(Me.chkProfileName)
 		Me.GroupBox2.Controls.Add(Me.chkCustomMemoryAllocator)
-		Me.GroupBox2.Controls.Add(Me.Label3)
 		Me.GroupBox2.Controls.Add(Me.cmbProfileName)
-		Me.GroupBox2.Controls.Add(Me.Label2)
 		Me.GroupBox2.Controls.Add(Me.cmbCustomMemoryAllocator)
 		Me.GroupBox2.Controls.Add(Me.chkWindowed)
 		Me.GroupBox2.Controls.Add(Me.Label1)
@@ -379,7 +373,6 @@ Partial Class frmMain
 		'
 		'txtCustomParameters
 		'
-		Me.txtCustomParameters.Enabled = False
 		Me.txtCustomParameters.Location = New System.Drawing.Point(156, 265)
 		Me.txtCustomParameters.Name = "txtCustomParameters"
 		Me.txtCustomParameters.Size = New System.Drawing.Size(256, 22)
@@ -391,19 +384,10 @@ Partial Class frmMain
 		Me.chkCustomArguments.AutoSize = True
 		Me.chkCustomArguments.Location = New System.Drawing.Point(27, 268)
 		Me.chkCustomArguments.Name = "chkCustomArguments"
-		Me.chkCustomArguments.Size = New System.Drawing.Size(15, 14)
+		Me.chkCustomArguments.Size = New System.Drawing.Size(127, 17)
 		Me.chkCustomArguments.TabIndex = 31
+		Me.chkCustomArguments.Text = "Custom Arguments:"
 		Me.chkCustomArguments.UseVisualStyleBackColor = True
-		'
-		'Label4
-		'
-		Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.Label4.Location = New System.Drawing.Point(42, 264)
-		Me.Label4.Name = "Label4"
-		Me.Label4.Size = New System.Drawing.Size(108, 21)
-		Me.Label4.TabIndex = 30
-		Me.Label4.Text = "Custom Parameters:"
-		Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'chkProfileName
 		'
@@ -411,8 +395,9 @@ Partial Class frmMain
 		Me.chkProfileName.AutoSize = True
 		Me.chkProfileName.Location = New System.Drawing.Point(27, 239)
 		Me.chkProfileName.Name = "chkProfileName"
-		Me.chkProfileName.Size = New System.Drawing.Size(15, 14)
+		Me.chkProfileName.Size = New System.Drawing.Size(94, 17)
 		Me.chkProfileName.TabIndex = 29
+		Me.chkProfileName.Text = "Profile Name:"
 		Me.chkProfileName.UseVisualStyleBackColor = True
 		'
 		'chkCustomMemoryAllocator
@@ -421,19 +406,10 @@ Partial Class frmMain
 		Me.chkCustomMemoryAllocator.AutoSize = True
 		Me.chkCustomMemoryAllocator.Location = New System.Drawing.Point(27, 212)
 		Me.chkCustomMemoryAllocator.Name = "chkCustomMemoryAllocator"
-		Me.chkCustomMemoryAllocator.Size = New System.Drawing.Size(15, 14)
+		Me.chkCustomMemoryAllocator.Size = New System.Drawing.Size(161, 17)
 		Me.chkCustomMemoryAllocator.TabIndex = 28
+		Me.chkCustomMemoryAllocator.Text = "Custom Memory Allocator:"
 		Me.chkCustomMemoryAllocator.UseVisualStyleBackColor = True
-		'
-		'Label3
-		'
-		Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.Label3.Location = New System.Drawing.Point(42, 235)
-		Me.Label3.Name = "Label3"
-		Me.Label3.Size = New System.Drawing.Size(77, 21)
-		Me.Label3.TabIndex = 27
-		Me.Label3.Text = "Profile Name:"
-		Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'cmbProfileName
 		'
@@ -445,16 +421,6 @@ Partial Class frmMain
 		Me.cmbProfileName.Name = "cmbProfileName"
 		Me.cmbProfileName.Size = New System.Drawing.Size(283, 21)
 		Me.cmbProfileName.TabIndex = 26
-		'
-		'Label2
-		'
-		Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.Label2.Location = New System.Drawing.Point(42, 208)
-		Me.Label2.Name = "Label2"
-		Me.Label2.Size = New System.Drawing.Size(146, 21)
-		Me.Label2.TabIndex = 25
-		Me.Label2.Text = "Custom Memory Allocator:"
-		Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'cmbCustomMemoryAllocator
 		'
@@ -979,15 +945,12 @@ Partial Class frmMain
 	Friend WithEvents ToolStripDropDownButton3 As System.Windows.Forms.ToolStripDropDownButton
 	Friend WithEvents tsiSetAltLoc As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents FileSystemWatcher1 As System.IO.FileSystemWatcher
-	Friend WithEvents Label2 As System.Windows.Forms.Label
 	Friend WithEvents cmbCustomMemoryAllocator As System.Windows.Forms.ComboBox
-	Friend WithEvents Label3 As System.Windows.Forms.Label
 	Friend WithEvents cmbProfileName As System.Windows.Forms.ComboBox
 	Friend WithEvents chkProfileName As System.Windows.Forms.CheckBox
 	Friend WithEvents chkCustomMemoryAllocator As System.Windows.Forms.CheckBox
 	Friend WithEvents tsiRunBattlEye As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents txtCustomParameters As System.Windows.Forms.TextBox
 	Friend WithEvents chkCustomArguments As System.Windows.Forms.CheckBox
-	Friend WithEvents Label4 As System.Windows.Forms.Label
 
 End Class

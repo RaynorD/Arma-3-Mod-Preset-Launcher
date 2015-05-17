@@ -5,7 +5,7 @@ Imports Arma3ModPresetLauncher.DragManager
 
 '============== CHANGELOG ===================
 
-'v1.2.3 - 2015-01-??
+'v1.2.3 - 2015-??-??
 '- Added: -malloc parameter (lists any dlls in Arma 3/Dlls)
 '- Added: -name parameter
 '- Added: Option to run Battleye (On by default, Fixes "battleye is not running" issue)
@@ -360,7 +360,7 @@ Public Class frmMain
 		chkNoLogs.Checked = My.Settings.NoLogs
 		chkNoFilePatching.Checked = My.Settings.NoFilePatching
 		chkWindowed.Checked = My.Settings.Windowed
-		
+
 
 		chkMem.Checked = My.Settings.MaxMemEnabled
 		If chkMem.Checked Then
@@ -595,7 +595,7 @@ Public Class frmMain
 				End If
 			Next
 		End If
-		
+
 		Return modList
 	End Function
 
@@ -899,6 +899,7 @@ Public Class frmMain
 		If My.Settings.MaxVRAMEnabled Then launchParams.Add("-maxVRAM=" + valueToRam(tBarVRAM.Value).ToString)
 		If My.Settings.CPUEnabled Then launchParams.Add("-cpuCount=" + lblCPUCount.Text)
 		If My.Settings.ExThreadsEnable Then launchParams.Add("-ExThreads=" + lblExThreads.Text)
+		If My.Settings.CustomArgumentsEnabled Then launchParams.Add(txtCustomParameters.Text)
 
 		If cmbCustomMemoryAllocator.SelectedItem <> "None" And Not IsNothing(cmbCustomMemoryAllocator.SelectedItem) Then
 			launchParams.Add("-malloc=" + cmbCustomMemoryAllocator.Text.ToLower())
@@ -1155,6 +1156,13 @@ Public Class frmMain
 		cmbProfileName.Enabled = chkProfileName.Checked
 		statusChk("Profile Name", chkProfileName.Checked, True)
 		refreshProfiles()
+	End Sub
+
+	Private Sub chkCustomArguments_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkCustomArguments.CheckedChanged
+		Console.WriteLine("chkCustomArguments_CheckedChanged: " + chkCustomArguments.Checked.ToString)
+		My.Settings.CustomArgumentsEnabled = chkCustomArguments.Checked
+		statusChk("Custom Arguments", chkCustomArguments.Checked, True)
+		updateLaunchStringAndColors()
 	End Sub
 
 	Private Sub chkMem_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkMem.CheckedChanged
@@ -1558,5 +1566,11 @@ Public Class frmMain
 		My.Settings.A3Path = My.Settings.A3Path.Substring(0, (My.Settings.A3Path.LastIndexOf("\") + 1)) & getExecutable()
 		My.Settings.Save()
 		updateLaunchStringAndColors()
+	End Sub
+
+	Private Sub txtCustomParameters_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCustomParameters.TextChanged
+		updateLaunchStringAndColors()
+		My.Settings.CustomArguments = txtCustomParameters.Text
+		My.Settings.Save()
 	End Sub
 End Class
