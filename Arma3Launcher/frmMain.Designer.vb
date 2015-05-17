@@ -44,6 +44,9 @@ Partial Class frmMain
 		Me.colModsAll = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
 		Me.btnRename = New System.Windows.Forms.Button()
 		Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+		Me.txtCustomParameters = New System.Windows.Forms.TextBox()
+		Me.chkCustomArguments = New System.Windows.Forms.CheckBox()
+		Me.Label4 = New System.Windows.Forms.Label()
 		Me.chkProfileName = New System.Windows.Forms.CheckBox()
 		Me.chkCustomMemoryAllocator = New System.Windows.Forms.CheckBox()
 		Me.Label3 = New System.Windows.Forms.Label()
@@ -93,9 +96,6 @@ Partial Class frmMain
 		Me.ToolTipCurrent = New System.Windows.Forms.ToolTip(Me.components)
 		Me.ToolTipAll = New System.Windows.Forms.ToolTip(Me.components)
 		Me.FileSystemWatcher1 = New System.IO.FileSystemWatcher()
-		Me.chkCustomArguments = New System.Windows.Forms.CheckBox()
-		Me.Label4 = New System.Windows.Forms.Label()
-		Me.TextBox1 = New System.Windows.Forms.TextBox()
 		Me.GroupBox1.SuspendLayout()
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.Panel1.SuspendLayout()
@@ -339,7 +339,7 @@ Partial Class frmMain
 		Me.GroupBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
 					Or System.Windows.Forms.AnchorStyles.Left) _
 					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.GroupBox2.Controls.Add(Me.TextBox1)
+		Me.GroupBox2.Controls.Add(Me.txtCustomParameters)
 		Me.GroupBox2.Controls.Add(Me.chkCustomArguments)
 		Me.GroupBox2.Controls.Add(Me.Label4)
 		Me.GroupBox2.Controls.Add(Me.chkProfileName)
@@ -376,6 +376,34 @@ Partial Class frmMain
 		Me.GroupBox2.TabIndex = 10
 		Me.GroupBox2.TabStop = False
 		Me.GroupBox2.Text = "Additional Parameters"
+		'
+		'txtCustomParameters
+		'
+		Me.txtCustomParameters.Enabled = False
+		Me.txtCustomParameters.Location = New System.Drawing.Point(156, 265)
+		Me.txtCustomParameters.Name = "txtCustomParameters"
+		Me.txtCustomParameters.Size = New System.Drawing.Size(256, 22)
+		Me.txtCustomParameters.TabIndex = 32
+		'
+		'chkCustomArguments
+		'
+		Me.chkCustomArguments.Anchor = System.Windows.Forms.AnchorStyles.Top
+		Me.chkCustomArguments.AutoSize = True
+		Me.chkCustomArguments.Location = New System.Drawing.Point(27, 268)
+		Me.chkCustomArguments.Name = "chkCustomArguments"
+		Me.chkCustomArguments.Size = New System.Drawing.Size(15, 14)
+		Me.chkCustomArguments.TabIndex = 31
+		Me.chkCustomArguments.UseVisualStyleBackColor = True
+		'
+		'Label4
+		'
+		Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
+		Me.Label4.Location = New System.Drawing.Point(42, 264)
+		Me.Label4.Name = "Label4"
+		Me.Label4.Size = New System.Drawing.Size(108, 21)
+		Me.Label4.TabIndex = 30
+		Me.Label4.Text = "Custom Parameters:"
+		Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'chkProfileName
 		'
@@ -851,33 +879,6 @@ Partial Class frmMain
 		Me.FileSystemWatcher1.EnableRaisingEvents = True
 		Me.FileSystemWatcher1.SynchronizingObject = Me
 		'
-		'chkCustomArguments
-		'
-		Me.chkCustomArguments.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.chkCustomArguments.AutoSize = True
-		Me.chkCustomArguments.Location = New System.Drawing.Point(27, 268)
-		Me.chkCustomArguments.Name = "chkCustomArguments"
-		Me.chkCustomArguments.Size = New System.Drawing.Size(15, 14)
-		Me.chkCustomArguments.TabIndex = 31
-		Me.chkCustomArguments.UseVisualStyleBackColor = True
-		'
-		'Label4
-		'
-		Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.Label4.Location = New System.Drawing.Point(42, 264)
-		Me.Label4.Name = "Label4"
-		Me.Label4.Size = New System.Drawing.Size(77, 21)
-		Me.Label4.TabIndex = 30
-		Me.Label4.Text = "Profile Name:"
-		Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'TextBox1
-		'
-		Me.TextBox1.Location = New System.Drawing.Point(129, 265)
-		Me.TextBox1.Name = "TextBox1"
-		Me.TextBox1.Size = New System.Drawing.Size(283, 22)
-		Me.TextBox1.TabIndex = 32
-		'
 		'frmMain
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -985,7 +986,7 @@ Partial Class frmMain
 	Friend WithEvents chkProfileName As System.Windows.Forms.CheckBox
 	Friend WithEvents chkCustomMemoryAllocator As System.Windows.Forms.CheckBox
 	Friend WithEvents tsiRunBattlEye As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+	Friend WithEvents txtCustomParameters As System.Windows.Forms.TextBox
 	Friend WithEvents chkCustomArguments As System.Windows.Forms.CheckBox
 	Friend WithEvents Label4 As System.Windows.Forms.Label
 
