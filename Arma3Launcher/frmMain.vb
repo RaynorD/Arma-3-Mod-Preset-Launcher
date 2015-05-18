@@ -3,6 +3,11 @@ Imports System.IO
 Imports System.Windows.Forms.ListBox
 Imports Arma3ModPresetLauncher.DragManager
 
+'TODO:
+' Add tooltip of full folder path
+' Make full paths part of Tag, not actual item name, DEBUG
+' When typing custom arg, have preview arg box scroll to right
+
 '============== CHANGELOG ===================
 
 'v1.2.3 - 2015-??-??
@@ -10,8 +15,9 @@ Imports Arma3ModPresetLauncher.DragManager
 '- Added: -name parameter
 '- Added: Option to run Battleye (On by default, Fixes "battleye is not running" issue)
 '- Removed: Option to run via command to steam client, as it no longer works
-'- Fixed: listviews in groups menu will no longer truncate modfolder paths
+'- Fixed: Listviews now handle horizontal resizing better
 '- Fixed: Adjusted wording of some tooltips to be clearer
+'- Changed: List views no longer show full path of modfolders (An item's full path can be viewed by holding the mouse over that item)
 
 'v1.2.2 - 2014-10-26
 '- Added: Now searches one level down for modfolders in folders (Arma 3\@Mods\@JSRS), so you can declutter your Arma directory (Note: top folder must start with @)
@@ -547,21 +553,20 @@ Public Class frmMain
 		Next
 		For Each modfolder As String In modfolderslist
 			modAllList.Add(modfolder)
-			If modfolder.StartsWith("@") Then
-				Dim listItem = lvModsAll.Items.Add(modfolder)
-			Else
-				'Dim displayName = modfolder.Substring(modfolder.LastIndexOf("\") + 1)
-				'Dim tooltip = modfolder.Substring(0, modfolder.LastIndexOf("\"))
-				Dim listItem = lvModsAll.Items.Add(modfolder)
-				'listItem.ToolTipText = tooltip
-			End If
+			Dim modfolderName = modfolder
 
+			If modfolderName.Contains("\") Then
+				modfolderName = trimToFolderName(modfolder)
+			End If
+			
+			Dim listItem = lvModsAll.Items.Add(modfolderName)
+			listItem.Tag = modfolder
 		Next
 
 		lvModsAll.Columns.Item(0).Width = -2
 		lvModsCurrent.Columns.Item(0).Width = -2
 
-		ToolTipAll.Dispose()
+		'ToolTipAll.Dispose()
 		'MsgBox(str)
 	End Sub
 
@@ -599,6 +604,12 @@ Public Class frmMain
 		Return modList
 	End Function
 
+	Private Function trimToFolderName(ByVal path As String)
+		Dim start = path.LastIndexOf("\") + 1
+		Dim length = path.Length - path.LastIndexOf("\") - 1
+		Return path.Substring(start, length)
+	End Function
+
 	Private Sub cmbPreset_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbPreset.SelectedIndexChanged
 		'Console.WriteLine("cmbPreset_SelectedIndexChanged: " + cmbPreset.SelectedIndex.ToString)
 		My.Settings.CurrentPreset = cmbPreset.SelectedItem.ToString()
@@ -619,12 +630,14 @@ Public Class frmMain
 	Private Sub updateCurrentPreset()
 		'Console.WriteLine("updateCurrentProject: " + cmbPreset.SelectedItem)
 		Dim items As ArrayList = getPreset(cmbPreset.SelectedItem) 'get array from settings
-		Dim itemsStrArr() As String = items.ToArray(GetType(String))
 
 		lvModsCurrent.Items.Clear()
-		For Each item In items
-			Dim listItem = lvModsCurrent.Items.Add(item.ToString)
-			If Not item.ToString.StartsWith("@") And Not item.ToString.Contains("\") Then	'item is a group
+		For Each item As String In items
+			Dim itemName = trimToFolderName(item)
+			Dim itemPath = item.ToString()
+			Dim listItem = lvModsCurrent.Items.Add(itemName)
+			listItem.Tag = itemPath
+			If Not item.ToString.StartsWith("@") Then	'item is a group
 				listItem.ForeColor = Color.Blue
 			End If
 		Next
@@ -788,15 +801,11 @@ Public Class frmMain
 		Dim item = lvModsAll.GetItemAt(e.X, e.Y)
 		If IsNothing(item) Then
 			ToolTipAll.RemoveAll()
-		Else
-			If Not item.ForeColor = Color.Blue And Not item.ForeColor = Color.CornflowerBlue Then
-				ToolTipAll.RemoveAll()
-			End If
 		End If
 	End Sub
 
 	Private Sub lvModsAll_ItemMouseHover(ByVal sender As Object, ByVal e As System.Windows.Forms.ListViewItemMouseHoverEventArgs) Handles lvModsAll.ItemMouseHover
-		If (e.Item.ForeColor = Color.Blue Or e.Item.ForeColor = Color.CornflowerBlue) And e.Item.Text <> "" And Not e.Item.Text.Contains("\") Then
+		If (e.Item.ForeColor = Color.Blue Or e.Item.ForeColor = Color.CornflowerBlue) Then
 			ToolTipAll = New ToolTip
 
 			Dim groupName As String = e.Item.Text
@@ -806,7 +815,18 @@ Public Class frmMain
 			Else
 				ToolTipAll.SetToolTip(lvModsAll, String.Join(vbCrLf, groupMods.ToArray))
 			End If
-		ElseIf e.Item.Text.Contains("\") Then 'it's a mod in a different folder
+		Else 'it's a mod in a different folder
+			ToolTipAll = New ToolTip
+
+			If (Not IsNothing(e.Item.Tag)) Then
+				Dim TooltipText As String = e.Item.Tag
+
+				If TooltipText.StartsWith("@") Then
+					TooltipText = My.Settings.A3Path.Substring(0, My.Settings.A3Path.LastIndexOf("\") + 1) & e.Item.Tag
+				End If
+
+				ToolTipAll.SetToolTip(lvModsAll, TooltipText)
+			End If
 		End If
 	End Sub
 
@@ -822,12 +842,12 @@ Public Class frmMain
 
 		If (lvModsCurrent.Items.Count > 0 And lvModsCurrent.Items.IndexOfKey("") <> 0) Then
 			For Each item As ListViewItem In lvModsCurrent.Items
-				If (item.Text.StartsWith("@")) Or item.Text.Contains("\") Then	'item is a single mod
-					If modArray.Contains(item.Text) Then 'mod was added by group
-						modArray.Remove(item.Text)
-						modArray.Add(item.Text)	'so move it up to the current position of the list
+				If (item.Text.StartsWith("@")) Then	'item is a single mod
+					If modArray.Contains(item.Tag) Then	'mod was added by group
+						modArray.Remove(item.Tag)
+						modArray.Add(item.Tag)	'so move it up to the current position of the list
 					Else
-						modArray.Add(item.Text)
+						modArray.Add(item.Tag)
 					End If
 				ElseIf item.Text <> "" Then	'item is a group
 					For Each m In getGroupModsFromString(item.Text)
@@ -842,7 +862,7 @@ Public Class frmMain
 			Next
 
 			For Each item As ListViewItem In lvModsAll.Items 'Reset all mods to forecolor black, color groups
-				If item.Text.StartsWith("@") Or item.Text.Contains("\") Then
+				If item.Text.StartsWith("@") Then
 					item.ForeColor = Color.Black
 				Else	  'item is a group
 					Dim itemInCurrentList = findInListView(item.Text, lvModsCurrent)
@@ -855,7 +875,7 @@ Public Class frmMain
 			Next
 
 			For Each item As ListViewItem In lvModsCurrent.Items 'Reset all mods to forecolor black and color gray in lvModsAll
-				If item.Text.StartsWith("@") Or item.Text.Contains("\") Then
+				If item.Text.StartsWith("@") Then
 					Dim itemInAllList = findInListView(item.Text, lvModsAll)
 					If IsNothing(itemInAllList) Then	'Mod has been removed or name changed
 						item.ForeColor = Color.Red
@@ -867,7 +887,15 @@ Public Class frmMain
 			Next
 
 			For Each m In groupedAddedMods 'Highlight mods that are added as part of a group
-				Dim itemInAllList As ListViewItem = findInListView(m.ToString, lvModsAll)
+				'Dim itemInAllList As ListViewItem = findInListView(m.ToString, lvModsAll)
+				Dim itemInAllList As ListViewItem
+
+				For Each item In lvModsAll.Items
+					If item.Tag = m Then
+						itemInAllList = item
+					End If
+				Next
+
 				If Not IsNothing(itemInAllList) Then
 					itemInAllList.ForeColor = Color.DarkOrange
 				End If
@@ -1002,16 +1030,23 @@ Public Class frmMain
 		savePreset(cmbPreset.SelectedItem, preset)
 		updateCurrentPreset()
 
-		lvModsCurrent.Focus()
+		lvModsCurrent.Select()
+		lvModsAll.SelectedItems.Clear()
 
 		For Each m In modsAdded
-			lvModsCurrent.FindItemWithText(m.text, True, 0).Selected = True
+			'lvModsCurrent.FindItemWithText(m.Text, True, 0).Selected = True
+
+			For Each itemInCurrent As ListViewItem In lvModsCurrent.Items
+				If m.Tag = itemInCurrent.Tag Then
+					itemInCurrent.Selected = True
+				End If
+			Next
 		Next
 
 		If modsToAdd.Count = 1 Then
 			If modsAdded.Count = 1 Then
 				Dim itemText As String = modsAdded.Item(0).Text
-				If itemText.StartsWith("@") Or itemText.Contains("\") Then	'it was a mod
+				If itemText.StartsWith("@") Then	'it was a mod
 					setStatus("Added " + itemText + " to " + cmbPreset.SelectedItem, True)
 				Else 'it was a group
 					If getGroupModsFromString(itemText).Count = 0 Then
@@ -1020,7 +1055,7 @@ Public Class frmMain
 				End If
 
 			Else 'modsAdded.Count = 0
-				If modsToAdd.Item(0).Text.StartsWith("@") Or modsToAdd.Item(0).Text.Contains("\") Then 'it was a mod
+				If modsToAdd.Item(0).Tag.ToString().StartsWith("@") Or modsToAdd.Item(0).Tag.ToString().Contains("\") Then	'it was a mod
 					setStatus("That mod is already in the current preset", False)
 				Else
 					setStatus("That group is already in the current preset", False)
@@ -1055,7 +1090,7 @@ Public Class frmMain
 		Dim modsRemoved As New ArrayList
 		modsRemoved.AddRange(modsToRemove)
 		For Each m In modsToRemove
-			preset.Remove(m.Text)
+			preset.Remove(m.Tag)
 			numRemoved += 1
 		Next
 		savePreset(cmbPreset.SelectedItem, preset)

@@ -153,7 +153,7 @@ Partial Class frmMain
 		'btnPresetAdd
 		'
 		Me.btnPresetAdd.Anchor = System.Windows.Forms.AnchorStyles.None
-		Me.btnPresetAdd.Location = New System.Drawing.Point(-1, 69)
+		Me.btnPresetAdd.Location = New System.Drawing.Point(-1, 65)
 		Me.btnPresetAdd.Name = "btnPresetAdd"
 		Me.btnPresetAdd.Size = New System.Drawing.Size(75, 23)
 		Me.btnPresetAdd.TabIndex = 7
@@ -163,7 +163,7 @@ Partial Class frmMain
 		'btnPresetRemove
 		'
 		Me.btnPresetRemove.Anchor = System.Windows.Forms.AnchorStyles.None
-		Me.btnPresetRemove.Location = New System.Drawing.Point(-1, 98)
+		Me.btnPresetRemove.Location = New System.Drawing.Point(-1, 94)
 		Me.btnPresetRemove.Name = "btnPresetRemove"
 		Me.btnPresetRemove.Size = New System.Drawing.Size(75, 23)
 		Me.btnPresetRemove.TabIndex = 8
@@ -172,7 +172,8 @@ Partial Class frmMain
 		'
 		'GroupBox1
 		'
-		Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+		Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+					Or System.Windows.Forms.AnchorStyles.Left) _
 					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.GroupBox1.Controls.Add(Me.TableLayoutPanel1)
 		Me.GroupBox1.Controls.Add(Me.btnRename)
@@ -182,7 +183,7 @@ Partial Class frmMain
 		Me.GroupBox1.Controls.Add(Me.btnDelete)
 		Me.GroupBox1.Location = New System.Drawing.Point(6, 23)
 		Me.GroupBox1.Name = "GroupBox1"
-		Me.GroupBox1.Size = New System.Drawing.Size(447, 279)
+		Me.GroupBox1.Size = New System.Drawing.Size(447, 271)
 		Me.GroupBox1.TabIndex = 9
 		Me.GroupBox1.TabStop = False
 		Me.GroupBox1.Text = "Mod Presets"
@@ -203,7 +204,7 @@ Partial Class frmMain
 		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 		Me.TableLayoutPanel1.RowCount = 1
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel1.Size = New System.Drawing.Size(443, 238)
+		Me.TableLayoutPanel1.Size = New System.Drawing.Size(443, 230)
 		Me.TableLayoutPanel1.TabIndex = 20
 		'
 		'Panel1
@@ -217,13 +218,13 @@ Partial Class frmMain
 		Me.Panel1.Location = New System.Drawing.Point(185, 0)
 		Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
 		Me.Panel1.Name = "Panel1"
-		Me.Panel1.Size = New System.Drawing.Size(73, 238)
+		Me.Panel1.Size = New System.Drawing.Size(73, 230)
 		Me.Panel1.TabIndex = 0
 		'
 		'btnGroups
 		'
 		Me.btnGroups.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-		Me.btnGroups.Location = New System.Drawing.Point(-1, 198)
+		Me.btnGroups.Location = New System.Drawing.Point(-1, 190)
 		Me.btnGroups.Name = "btnGroups"
 		Me.btnGroups.Size = New System.Drawing.Size(75, 25)
 		Me.btnGroups.TabIndex = 19
@@ -258,7 +259,7 @@ Partial Class frmMain
 		Me.gbCurrent.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.gbCurrent.Location = New System.Drawing.Point(3, 3)
 		Me.gbCurrent.Name = "gbCurrent"
-		Me.gbCurrent.Size = New System.Drawing.Size(179, 232)
+		Me.gbCurrent.Size = New System.Drawing.Size(179, 224)
 		Me.gbCurrent.TabIndex = 16
 		Me.gbCurrent.TabStop = False
 		Me.gbCurrent.Text = "Current Preset"
@@ -277,7 +278,7 @@ Partial Class frmMain
 		Me.lvModsCurrent.LabelWrap = False
 		Me.lvModsCurrent.Location = New System.Drawing.Point(5, 13)
 		Me.lvModsCurrent.Name = "lvModsCurrent"
-		Me.lvModsCurrent.Size = New System.Drawing.Size(169, 214)
+		Me.lvModsCurrent.Size = New System.Drawing.Size(169, 206)
 		Me.lvModsCurrent.TabIndex = 19
 		Me.lvModsCurrent.UseCompatibleStateImageBehavior = False
 		Me.lvModsCurrent.View = System.Windows.Forms.View.Details
@@ -293,7 +294,7 @@ Partial Class frmMain
 		Me.gbAll.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.gbAll.Location = New System.Drawing.Point(261, 3)
 		Me.gbAll.Name = "gbAll"
-		Me.gbAll.Size = New System.Drawing.Size(179, 232)
+		Me.gbAll.Size = New System.Drawing.Size(179, 224)
 		Me.gbAll.TabIndex = 17
 		Me.gbAll.TabStop = False
 		Me.gbAll.Text = "All Detected Mods"
@@ -311,7 +312,7 @@ Partial Class frmMain
 		Me.lvModsAll.LabelWrap = False
 		Me.lvModsAll.Location = New System.Drawing.Point(5, 13)
 		Me.lvModsAll.Name = "lvModsAll"
-		Me.lvModsAll.Size = New System.Drawing.Size(169, 214)
+		Me.lvModsAll.Size = New System.Drawing.Size(169, 206)
 		Me.lvModsAll.TabIndex = 20
 		Me.lvModsAll.UseCompatibleStateImageBehavior = False
 		Me.lvModsAll.View = System.Windows.Forms.View.Details
@@ -333,8 +334,7 @@ Partial Class frmMain
 		'
 		'GroupBox2
 		'
-		Me.GroupBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Left) _
+		Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
 					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.GroupBox2.Controls.Add(Me.txtCustomParameters)
 		Me.GroupBox2.Controls.Add(Me.chkCustomArguments)
@@ -364,25 +364,26 @@ Partial Class frmMain
 		Me.GroupBox2.Controls.Add(Me.chkShowScriptErrors)
 		Me.GroupBox2.Controls.Add(Me.chkEmptyWorld)
 		Me.GroupBox2.Controls.Add(Me.chkNoSplash)
-		Me.GroupBox2.Location = New System.Drawing.Point(6, 306)
+		Me.GroupBox2.Location = New System.Drawing.Point(6, 298)
 		Me.GroupBox2.Name = "GroupBox2"
-		Me.GroupBox2.Size = New System.Drawing.Size(447, 298)
+		Me.GroupBox2.Size = New System.Drawing.Size(447, 294)
 		Me.GroupBox2.TabIndex = 10
 		Me.GroupBox2.TabStop = False
 		Me.GroupBox2.Text = "Additional Parameters"
 		'
 		'txtCustomParameters
 		'
-		Me.txtCustomParameters.Location = New System.Drawing.Point(156, 265)
+		Me.txtCustomParameters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.txtCustomParameters.Location = New System.Drawing.Point(156, 263)
 		Me.txtCustomParameters.Name = "txtCustomParameters"
 		Me.txtCustomParameters.Size = New System.Drawing.Size(256, 22)
 		Me.txtCustomParameters.TabIndex = 32
 		'
 		'chkCustomArguments
 		'
-		Me.chkCustomArguments.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkCustomArguments.AutoSize = True
-		Me.chkCustomArguments.Location = New System.Drawing.Point(27, 268)
+		Me.chkCustomArguments.Location = New System.Drawing.Point(27, 266)
 		Me.chkCustomArguments.Name = "chkCustomArguments"
 		Me.chkCustomArguments.Size = New System.Drawing.Size(127, 17)
 		Me.chkCustomArguments.TabIndex = 31
@@ -393,7 +394,7 @@ Partial Class frmMain
 		'
 		Me.chkProfileName.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkProfileName.AutoSize = True
-		Me.chkProfileName.Location = New System.Drawing.Point(27, 239)
+		Me.chkProfileName.Location = New System.Drawing.Point(27, 237)
 		Me.chkProfileName.Name = "chkProfileName"
 		Me.chkProfileName.Size = New System.Drawing.Size(94, 17)
 		Me.chkProfileName.TabIndex = 29
@@ -404,7 +405,7 @@ Partial Class frmMain
 		'
 		Me.chkCustomMemoryAllocator.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkCustomMemoryAllocator.AutoSize = True
-		Me.chkCustomMemoryAllocator.Location = New System.Drawing.Point(27, 212)
+		Me.chkCustomMemoryAllocator.Location = New System.Drawing.Point(27, 210)
 		Me.chkCustomMemoryAllocator.Name = "chkCustomMemoryAllocator"
 		Me.chkCustomMemoryAllocator.Size = New System.Drawing.Size(161, 17)
 		Me.chkCustomMemoryAllocator.TabIndex = 28
@@ -417,7 +418,7 @@ Partial Class frmMain
 		Me.cmbProfileName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.cmbProfileName.Enabled = False
 		Me.cmbProfileName.FormattingEnabled = True
-		Me.cmbProfileName.Location = New System.Drawing.Point(127, 236)
+		Me.cmbProfileName.Location = New System.Drawing.Point(127, 234)
 		Me.cmbProfileName.Name = "cmbProfileName"
 		Me.cmbProfileName.Size = New System.Drawing.Size(283, 21)
 		Me.cmbProfileName.TabIndex = 26
@@ -428,7 +429,7 @@ Partial Class frmMain
 		Me.cmbCustomMemoryAllocator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.cmbCustomMemoryAllocator.Enabled = False
 		Me.cmbCustomMemoryAllocator.FormattingEnabled = True
-		Me.cmbCustomMemoryAllocator.Location = New System.Drawing.Point(192, 209)
+		Me.cmbCustomMemoryAllocator.Location = New System.Drawing.Point(192, 207)
 		Me.cmbCustomMemoryAllocator.Name = "cmbCustomMemoryAllocator"
 		Me.cmbCustomMemoryAllocator.Size = New System.Drawing.Size(218, 21)
 		Me.cmbCustomMemoryAllocator.TabIndex = 24
@@ -447,7 +448,7 @@ Partial Class frmMain
 		'Label1
 		'
 		Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.Label1.Location = New System.Drawing.Point(195, 174)
+		Me.Label1.Location = New System.Drawing.Point(195, 179)
 		Me.Label1.Name = "Label1"
 		Me.Label1.Size = New System.Drawing.Size(98, 21)
 		Me.Label1.TabIndex = 22
@@ -460,7 +461,7 @@ Partial Class frmMain
 		Me.cmbLaunchAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.cmbLaunchAction.FormattingEnabled = True
 		Me.cmbLaunchAction.Items.AddRange(New Object() {"Nothing", "Minimize", "Close"})
-		Me.cmbLaunchAction.Location = New System.Drawing.Point(296, 175)
+		Me.cmbLaunchAction.Location = New System.Drawing.Point(296, 180)
 		Me.cmbLaunchAction.Name = "cmbLaunchAction"
 		Me.cmbLaunchAction.Size = New System.Drawing.Size(114, 21)
 		Me.cmbLaunchAction.TabIndex = 21
@@ -696,7 +697,7 @@ Partial Class frmMain
 		'
 		Me.btnLaunch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
 		Me.btnLaunch.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btnLaunch.Location = New System.Drawing.Point(5, 610)
+		Me.btnLaunch.Location = New System.Drawing.Point(5, 598)
 		Me.btnLaunch.Name = "btnLaunch"
 		Me.btnLaunch.Size = New System.Drawing.Size(88, 40)
 		Me.btnLaunch.TabIndex = 11
@@ -707,7 +708,7 @@ Partial Class frmMain
 		'
 		Me.txtLaunchString.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
 					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.txtLaunchString.Location = New System.Drawing.Point(100, 611)
+		Me.txtLaunchString.Location = New System.Drawing.Point(100, 599)
 		Me.txtLaunchString.Multiline = True
 		Me.txtLaunchString.Name = "txtLaunchString"
 		Me.txtLaunchString.ReadOnly = True
@@ -719,7 +720,7 @@ Partial Class frmMain
 		'StatusStrip1
 		'
 		Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.txtStatus})
-		Me.StatusStrip1.Location = New System.Drawing.Point(0, 654)
+		Me.StatusStrip1.Location = New System.Drawing.Point(0, 642)
 		Me.StatusStrip1.Name = "StatusStrip1"
 		Me.StatusStrip1.Size = New System.Drawing.Size(458, 22)
 		Me.StatusStrip1.SizingGrip = False
@@ -849,7 +850,7 @@ Partial Class frmMain
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(458, 676)
+		Me.ClientSize = New System.Drawing.Size(458, 664)
 		Me.Controls.Add(Me.StatusStrip1)
 		Me.Controls.Add(Me.txtLaunchString)
 		Me.Controls.Add(Me.btnLaunch)
@@ -859,7 +860,7 @@ Partial Class frmMain
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
 		Me.MaximizeBox = False
 		Me.MaximumSize = New System.Drawing.Size(1000, 1440)
-		Me.MinimumSize = New System.Drawing.Size(472, 712)
+		Me.MinimumSize = New System.Drawing.Size(472, 700)
 		Me.Name = "frmMain"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
 		Me.Text = "Arma 3 Mod Preset Launcher - v1.2.3"
