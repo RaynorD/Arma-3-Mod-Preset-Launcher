@@ -9,7 +9,7 @@ Imports Arma3ModPresetLauncher.DragManager
 
 'v1.2.3 - 2015-??-??
 '- Added: -malloc parameter (lists any dlls in Arma 3/Dlls)
-'- Added: -name parameter
+'- Added: -name parameter (Select profile)
 '- Added: Option to run Battleye (On by default, Fixes "battleye is not running" issue)
 '- Removed: Option to run via command to steam client, as it no longer works
 '- Fixed: Listviews now handle horizontal resizing better
@@ -363,6 +363,8 @@ Public Class frmMain
 		chkNoLogs.Checked = My.Settings.NoLogs
 		chkNoFilePatching.Checked = My.Settings.NoFilePatching
 		chkWindowed.Checked = My.Settings.Windowed
+		chkCustomArguments.Checked = My.Settings.CustomArgumentsEnabled
+		txtCustomParameters.Text = My.Settings.CustomArguments
 
 
 		chkMem.Checked = My.Settings.MaxMemEnabled

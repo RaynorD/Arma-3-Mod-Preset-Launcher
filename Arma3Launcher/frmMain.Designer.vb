@@ -859,7 +859,7 @@ Partial Class frmMain
 		Me.Controls.Add(Me.ToolStrip1)
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
 		Me.MaximizeBox = False
-		Me.MaximumSize = New System.Drawing.Size(1000, 1440)
+		Me.MaximumSize = New System.Drawing.Size(1080, 1920)
 		Me.MinimumSize = New System.Drawing.Size(472, 700)
 		Me.Name = "frmMain"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
