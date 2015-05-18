@@ -3,10 +3,7 @@ Imports System.IO
 Imports System.Windows.Forms.ListBox
 Imports Arma3ModPresetLauncher.DragManager
 
-'TODO:
-' Add tooltip of full folder path
-' Make full paths part of Tag, not actual item name, DEBUG
-' When typing custom arg, have preview arg box scroll to right
+
 
 '============== CHANGELOG ===================
 
@@ -1607,5 +1604,7 @@ Public Class frmMain
 		updateLaunchStringAndColors()
 		My.Settings.CustomArguments = txtCustomParameters.Text
 		My.Settings.Save()
+		txtLaunchString.Select(txtLaunchString.Text.Length, 0)
+		txtLaunchString.ScrollToCaret()
 	End Sub
 End Class
