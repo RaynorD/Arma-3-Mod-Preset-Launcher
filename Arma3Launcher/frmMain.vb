@@ -63,8 +63,8 @@ Public Class frmMain
 
 		loadWindowSizeLoc()
 
-		lvModsAll.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent)
-		lvModsCurrent.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent)
+		'lvModsAll.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent)
+		'lvModsCurrent.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent)
 	End Sub
 
 	Private Sub addParameterTooltips()
@@ -257,26 +257,6 @@ Public Class frmMain
 	End Sub
 
 	Private Sub frmMain_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-
-		'Not working. Attempt to avoid Steam hook when run from the Steam library, so that it shows you as playing Arma 3, not the launcher
-		'Dim args As New ArrayList
-		'args.AddRange(My.Application.CommandLineArgs)
-		'If My.Application.CommandLineArgs.Count > 0 Then
-		'	If args(0) = "-steam" Then
-		'		'MsgBox("-steam")
-		'		Try
-		'			'MsgBox(Application.ExecutablePath())
-		'			'Process.Start("start", Application.ExecutablePath() + " & exit")
-		'			Process.Start(Application.ExecutablePath(), " & exit")
-		'			End
-		'		Catch ex As Exception
-		'			Console.WriteLine(ex.Message)
-		'		End Try
-		'	End If
-		'Else
-		'	'MsgBox("Count 0")
-		'End If
-
 		If My.Settings.A3Path Is Nothing Or My.Settings.A3Path = "" Then
 			My.Settings.A3Path = locateA3()
 		ElseIf Not File.Exists(My.Settings.A3Path) Then
@@ -367,6 +347,9 @@ Public Class frmMain
 		checkForMissingMods()
 
 		refreshMemAllocators()
+
+		lvModsAll.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+		lvModsCurrent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
 	End Sub
 
 	Private Function locateA3()
@@ -375,8 +358,8 @@ Public Class frmMain
 		Dim steamPath As String = steamExe.Replace("\steam.exe", "")
 
 		'check if arma installed inside
-		If (File.Exists(steamPath + "\steamapps\common\Arma 3\" + My.Settings.RunBattlEye)) Then	'return path and skip input dialog
-			path = steamPath + "\steamapps\common\Arma 3\" + My.Settings.RunBattlEye
+		If (File.Exists(steamPath + "\steamapps\common\Arma 3\arma3.exe")) Then	'return path and skip input dialog
+			path = steamPath + "\steamapps\common\Arma 3\arma3.exe"
 
 			MessageBox.Show(
 			  "Detected Arma 3 Installation at:" + vbCrLf + vbCrLf + path + vbCrLf + vbCrLf + "Loading mods...",
@@ -783,7 +766,6 @@ Public Class frmMain
 	Private Sub updateLaunchStringAndColors()
 		'Console.WriteLine("updateLaunchStringAndColors()")
 		Dim launchParams As New ArrayList()
-
 		Dim modArray As New ArrayList
 		Dim modString As String = "-mod="
 		Dim groupedAddedMods As New ArrayList
@@ -883,6 +865,11 @@ Public Class frmMain
 
 		If cmbProfileName.SelectedItem <> "None" And Not IsNothing(cmbProfileName.SelectedItem) Then
 			launchParams.Add("-name=""" + cmbProfileName.Text + """")
+		End If
+
+		If My.Settings.RunBattlEye Then
+			launchParams.Insert(0, "0")
+			launchParams.Insert(1, "1")
 		End If
 
 		launchString = String.Join(" ", launchParams.ToArray)
@@ -1307,7 +1294,7 @@ Public Class frmMain
 
 		Dim p As New Process
 		p.StartInfo.WorkingDirectory = My.Settings.A3Path.Substring(0, My.Settings.A3Path.LastIndexOf("\"))
-		p.StartInfo.FileName = getExecutable()
+		p.StartInfo.FileName = My.Settings.A3Path
 		p.StartInfo.Arguments = launchString
 		p.Start()
 		'Process.Start(txtLaunchString.Text.Substring(0, txtLaunchString.Text.IndexOf(" -mod")), txtLaunchString.Text.Substring(txtLaunchString.Text.IndexOf(" -mod")))
@@ -1557,5 +1544,10 @@ Public Class frmMain
 		My.Settings.Save()
 		txtLaunchString.Select(txtLaunchString.Text.Length, 0)
 		txtLaunchString.ScrollToCaret()
+	End Sub
+
+	Private Sub frmMain_Resize(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Resize
+		lvModsAll.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+		lvModsCurrent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
 	End Sub
 End Class
