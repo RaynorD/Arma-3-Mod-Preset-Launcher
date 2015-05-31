@@ -68,7 +68,7 @@ Public Class frmMain
 	Private Sub frmMain_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
 
 		' =========================== DEBUG ===========================================
-		My.Settings.A3Path = "E:\Steam\steamapps\common\Arma 3\" + getExecutable()
+		'My.Settings.A3Path = "E:\Steam\steamapps\common\Arma 3\" + getExecutable()
 		' =============================================================================
 
 		If My.Settings.A3Path Is Nothing Or My.Settings.A3Path = "" Then
@@ -615,10 +615,6 @@ Public Class frmMain
 	'	End If
 	'End Sub
 
-	Private Sub btnUp_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-		moveSelectedItemUp()
-	End Sub
-
 	Protected Friend Sub moveSelectedItemUp()
 		If lvModsCurrent.SelectedIndices.Count = 0 Then
 			setStatus("You must select an item to move", False)
@@ -645,10 +641,6 @@ Public Class frmMain
 			lvModsCurrent.Focus()
 			lvModsCurrent.Items.Item(selectedIndex - 1).Selected = True	' Set selection back to same mod
 		End If
-	End Sub
-
-	Private Sub btnDown_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
-		moveSelectedItemDown()
 	End Sub
 
 	Protected Friend Sub moveSelectedItemDown()
