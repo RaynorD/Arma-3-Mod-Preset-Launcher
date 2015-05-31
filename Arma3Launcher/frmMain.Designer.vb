@@ -30,12 +30,9 @@ Partial Class frmMain
 		Me.btnDelete = New System.Windows.Forms.Button()
 		Me.btnPresetAdd = New System.Windows.Forms.Button()
 		Me.btnPresetRemove = New System.Windows.Forms.Button()
-		Me.GroupBox1 = New System.Windows.Forms.GroupBox()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.Panel1 = New System.Windows.Forms.Panel()
 		Me.btnGroups = New System.Windows.Forms.Button()
-		Me.btnDown = New System.Windows.Forms.Button()
-		Me.btnUp = New System.Windows.Forms.Button()
 		Me.gbCurrent = New System.Windows.Forms.GroupBox()
 		Me.lvModsCurrent = New System.Windows.Forms.ListView()
 		Me.colModsCurrent = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -43,7 +40,6 @@ Partial Class frmMain
 		Me.lvModsAll = New System.Windows.Forms.ListView()
 		Me.colModsAll = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
 		Me.btnRename = New System.Windows.Forms.Button()
-		Me.GroupBox2 = New System.Windows.Forms.GroupBox()
 		Me.txtCustomParameters = New System.Windows.Forms.TextBox()
 		Me.chkCustomArguments = New System.Windows.Forms.CheckBox()
 		Me.chkProfileName = New System.Windows.Forms.CheckBox()
@@ -86,6 +82,11 @@ Partial Class frmMain
 		Me.ToolStripDropDownButton3 = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.tsiSetAltLoc = New System.Windows.Forms.ToolStripMenuItem()
 		Me.tsiRunBattlEye = New System.Windows.Forms.ToolStripMenuItem()
+		Me.tsiRunThroughSteam = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+		Me.MemoryAllocatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.NoneToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ResetSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripDropDownButton2 = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.tsbUsage = New System.Windows.Forms.ToolStripMenuItem()
 		Me.tsbAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -93,12 +94,13 @@ Partial Class frmMain
 		Me.ToolTipCurrent = New System.Windows.Forms.ToolTip(Me.components)
 		Me.ToolTipAll = New System.Windows.Forms.ToolTip(Me.components)
 		Me.FileSystemWatcher1 = New System.IO.FileSystemWatcher()
-		Me.GroupBox1.SuspendLayout()
+		Me.tabPanel = New System.Windows.Forms.TabControl()
+		Me.tabModPresets = New System.Windows.Forms.TabPage()
+		Me.tabParameters = New System.Windows.Forms.TabPage()
 		Me.TableLayoutPanel1.SuspendLayout()
 		Me.Panel1.SuspendLayout()
 		Me.gbCurrent.SuspendLayout()
 		Me.gbAll.SuspendLayout()
-		Me.GroupBox2.SuspendLayout()
 		CType(Me.tbarExThreads, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.tBarCPUCount, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.tBarVRAM, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,6 +108,9 @@ Partial Class frmMain
 		Me.StatusStrip1.SuspendLayout()
 		Me.ToolStrip1.SuspendLayout()
 		CType(Me.FileSystemWatcher1, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.tabPanel.SuspendLayout()
+		Me.tabModPresets.SuspendLayout()
+		Me.tabParameters.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'cmbPreset
@@ -114,16 +119,16 @@ Partial Class frmMain
 					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.cmbPreset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.cmbPreset.FormattingEnabled = True
-		Me.cmbPreset.Location = New System.Drawing.Point(5, 16)
+		Me.cmbPreset.Location = New System.Drawing.Point(3, 6)
 		Me.cmbPreset.MaxDropDownItems = 20
 		Me.cmbPreset.Name = "cmbPreset"
-		Me.cmbPreset.Size = New System.Drawing.Size(183, 21)
+		Me.cmbPreset.Size = New System.Drawing.Size(138, 21)
 		Me.cmbPreset.TabIndex = 1
 		'
 		'btnNew
 		'
 		Me.btnNew.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnNew.Location = New System.Drawing.Point(194, 15)
+		Me.btnNew.Location = New System.Drawing.Point(148, 5)
 		Me.btnNew.Name = "btnNew"
 		Me.btnNew.Size = New System.Drawing.Size(52, 23)
 		Me.btnNew.TabIndex = 2
@@ -133,7 +138,7 @@ Partial Class frmMain
 		'btnDuplicate
 		'
 		Me.btnDuplicate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnDuplicate.Location = New System.Drawing.Point(320, 15)
+		Me.btnDuplicate.Location = New System.Drawing.Point(274, 5)
 		Me.btnDuplicate.Name = "btnDuplicate"
 		Me.btnDuplicate.Size = New System.Drawing.Size(65, 23)
 		Me.btnDuplicate.TabIndex = 3
@@ -143,7 +148,7 @@ Partial Class frmMain
 		'btnDelete
 		'
 		Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnDelete.Location = New System.Drawing.Point(391, 15)
+		Me.btnDelete.Location = New System.Drawing.Point(345, 5)
 		Me.btnDelete.Name = "btnDelete"
 		Me.btnDelete.Size = New System.Drawing.Size(50, 23)
 		Me.btnDelete.TabIndex = 4
@@ -152,8 +157,9 @@ Partial Class frmMain
 		'
 		'btnPresetAdd
 		'
-		Me.btnPresetAdd.Anchor = System.Windows.Forms.AnchorStyles.None
-		Me.btnPresetAdd.Location = New System.Drawing.Point(-1, 65)
+		Me.btnPresetAdd.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.btnPresetAdd.Location = New System.Drawing.Point(-1, 15)
 		Me.btnPresetAdd.Name = "btnPresetAdd"
 		Me.btnPresetAdd.Size = New System.Drawing.Size(75, 23)
 		Me.btnPresetAdd.TabIndex = 7
@@ -162,31 +168,14 @@ Partial Class frmMain
 		'
 		'btnPresetRemove
 		'
-		Me.btnPresetRemove.Anchor = System.Windows.Forms.AnchorStyles.None
-		Me.btnPresetRemove.Location = New System.Drawing.Point(-1, 94)
+		Me.btnPresetRemove.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.btnPresetRemove.Location = New System.Drawing.Point(-1, 44)
 		Me.btnPresetRemove.Name = "btnPresetRemove"
 		Me.btnPresetRemove.Size = New System.Drawing.Size(75, 23)
 		Me.btnPresetRemove.TabIndex = 8
 		Me.btnPresetRemove.Text = "&Remove >>"
 		Me.btnPresetRemove.UseVisualStyleBackColor = True
-		'
-		'GroupBox1
-		'
-		Me.GroupBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-					Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.GroupBox1.Controls.Add(Me.TableLayoutPanel1)
-		Me.GroupBox1.Controls.Add(Me.btnRename)
-		Me.GroupBox1.Controls.Add(Me.cmbPreset)
-		Me.GroupBox1.Controls.Add(Me.btnNew)
-		Me.GroupBox1.Controls.Add(Me.btnDuplicate)
-		Me.GroupBox1.Controls.Add(Me.btnDelete)
-		Me.GroupBox1.Location = New System.Drawing.Point(6, 23)
-		Me.GroupBox1.Name = "GroupBox1"
-		Me.GroupBox1.Size = New System.Drawing.Size(447, 271)
-		Me.GroupBox1.TabIndex = 9
-		Me.GroupBox1.TabStop = False
-		Me.GroupBox1.Text = "Mod Presets"
 		'
 		'TableLayoutPanel1
 		'
@@ -200,11 +189,12 @@ Partial Class frmMain
 		Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 1, 0)
 		Me.TableLayoutPanel1.Controls.Add(Me.gbCurrent, 0, 0)
 		Me.TableLayoutPanel1.Controls.Add(Me.gbAll, 2, 0)
-		Me.TableLayoutPanel1.Location = New System.Drawing.Point(2, 39)
+		Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 29)
+		Me.TableLayoutPanel1.MinimumSize = New System.Drawing.Size(0, 105)
 		Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
 		Me.TableLayoutPanel1.RowCount = 1
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-		Me.TableLayoutPanel1.Size = New System.Drawing.Size(443, 230)
+		Me.TableLayoutPanel1.Size = New System.Drawing.Size(398, 247)
 		Me.TableLayoutPanel1.TabIndex = 20
 		'
 		'Panel1
@@ -212,54 +202,34 @@ Partial Class frmMain
 		Me.Panel1.Controls.Add(Me.btnGroups)
 		Me.Panel1.Controls.Add(Me.btnPresetRemove)
 		Me.Panel1.Controls.Add(Me.btnPresetAdd)
-		Me.Panel1.Controls.Add(Me.btnDown)
-		Me.Panel1.Controls.Add(Me.btnUp)
 		Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.Panel1.Location = New System.Drawing.Point(185, 0)
+		Me.Panel1.Location = New System.Drawing.Point(162, 0)
 		Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
+		Me.Panel1.MinimumSize = New System.Drawing.Size(0, 197)
 		Me.Panel1.Name = "Panel1"
-		Me.Panel1.Size = New System.Drawing.Size(73, 230)
+		Me.Panel1.Size = New System.Drawing.Size(73, 247)
 		Me.Panel1.TabIndex = 0
 		'
 		'btnGroups
 		'
-		Me.btnGroups.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-		Me.btnGroups.Location = New System.Drawing.Point(-1, 190)
+		Me.btnGroups.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.btnGroups.Location = New System.Drawing.Point(-1, 76)
 		Me.btnGroups.Name = "btnGroups"
 		Me.btnGroups.Size = New System.Drawing.Size(75, 25)
 		Me.btnGroups.TabIndex = 19
 		Me.btnGroups.Text = "Groups..."
 		Me.btnGroups.UseVisualStyleBackColor = True
 		'
-		'btnDown
-		'
-		Me.btnDown.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.btnDown.Image = Global.Arma3ModPresetLauncher.My.Resources.Resources.down_arrow_16px
-		Me.btnDown.Location = New System.Drawing.Point(5, 11)
-		Me.btnDown.Name = "btnDown"
-		Me.btnDown.Size = New System.Drawing.Size(28, 32)
-		Me.btnDown.TabIndex = 11
-		Me.btnDown.UseVisualStyleBackColor = True
-		Me.btnDown.Visible = False
-		'
-		'btnUp
-		'
-		Me.btnUp.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.btnUp.Image = Global.Arma3ModPresetLauncher.My.Resources.Resources.up_arrow_16px
-		Me.btnUp.Location = New System.Drawing.Point(39, 11)
-		Me.btnUp.Name = "btnUp"
-		Me.btnUp.Size = New System.Drawing.Size(28, 32)
-		Me.btnUp.TabIndex = 10
-		Me.btnUp.UseVisualStyleBackColor = True
-		Me.btnUp.Visible = False
-		'
 		'gbCurrent
 		'
+		Me.gbCurrent.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+					Or System.Windows.Forms.AnchorStyles.Left) _
+					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.gbCurrent.Controls.Add(Me.lvModsCurrent)
-		Me.gbCurrent.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.gbCurrent.Location = New System.Drawing.Point(3, 3)
 		Me.gbCurrent.Name = "gbCurrent"
-		Me.gbCurrent.Size = New System.Drawing.Size(179, 224)
+		Me.gbCurrent.Size = New System.Drawing.Size(156, 241)
 		Me.gbCurrent.TabIndex = 16
 		Me.gbCurrent.TabStop = False
 		Me.gbCurrent.Text = "Current Preset"
@@ -278,7 +248,7 @@ Partial Class frmMain
 		Me.lvModsCurrent.LabelWrap = False
 		Me.lvModsCurrent.Location = New System.Drawing.Point(5, 13)
 		Me.lvModsCurrent.Name = "lvModsCurrent"
-		Me.lvModsCurrent.Size = New System.Drawing.Size(169, 206)
+		Me.lvModsCurrent.Size = New System.Drawing.Size(146, 223)
 		Me.lvModsCurrent.TabIndex = 19
 		Me.lvModsCurrent.UseCompatibleStateImageBehavior = False
 		Me.lvModsCurrent.View = System.Windows.Forms.View.Details
@@ -286,15 +256,17 @@ Partial Class frmMain
 		'colModsCurrent
 		'
 		Me.colModsCurrent.Text = "Mods"
-		Me.colModsCurrent.Width = 147
+		Me.colModsCurrent.Width = 100
 		'
 		'gbAll
 		'
+		Me.gbAll.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+					Or System.Windows.Forms.AnchorStyles.Left) _
+					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.gbAll.Controls.Add(Me.lvModsAll)
-		Me.gbAll.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.gbAll.Location = New System.Drawing.Point(261, 3)
+		Me.gbAll.Location = New System.Drawing.Point(238, 3)
 		Me.gbAll.Name = "gbAll"
-		Me.gbAll.Size = New System.Drawing.Size(179, 224)
+		Me.gbAll.Size = New System.Drawing.Size(157, 241)
 		Me.gbAll.TabIndex = 17
 		Me.gbAll.TabStop = False
 		Me.gbAll.Text = "All Detected Mods"
@@ -312,7 +284,7 @@ Partial Class frmMain
 		Me.lvModsAll.LabelWrap = False
 		Me.lvModsAll.Location = New System.Drawing.Point(5, 13)
 		Me.lvModsAll.Name = "lvModsAll"
-		Me.lvModsAll.Size = New System.Drawing.Size(169, 206)
+		Me.lvModsAll.Size = New System.Drawing.Size(147, 223)
 		Me.lvModsAll.TabIndex = 20
 		Me.lvModsAll.UseCompatibleStateImageBehavior = False
 		Me.lvModsAll.View = System.Windows.Forms.View.Details
@@ -320,70 +292,31 @@ Partial Class frmMain
 		'colModsAll
 		'
 		Me.colModsAll.Text = "Mods"
-		Me.colModsAll.Width = 147
+		Me.colModsAll.Width = 100
 		'
 		'btnRename
 		'
 		Me.btnRename.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.btnRename.Location = New System.Drawing.Point(252, 15)
+		Me.btnRename.Location = New System.Drawing.Point(206, 5)
 		Me.btnRename.Name = "btnRename"
 		Me.btnRename.Size = New System.Drawing.Size(62, 23)
 		Me.btnRename.TabIndex = 18
 		Me.btnRename.Text = "Rena&me"
 		Me.btnRename.UseVisualStyleBackColor = True
 		'
-		'GroupBox2
-		'
-		Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.GroupBox2.Controls.Add(Me.txtCustomParameters)
-		Me.GroupBox2.Controls.Add(Me.chkCustomArguments)
-		Me.GroupBox2.Controls.Add(Me.chkProfileName)
-		Me.GroupBox2.Controls.Add(Me.chkCustomMemoryAllocator)
-		Me.GroupBox2.Controls.Add(Me.cmbProfileName)
-		Me.GroupBox2.Controls.Add(Me.cmbCustomMemoryAllocator)
-		Me.GroupBox2.Controls.Add(Me.chkWindowed)
-		Me.GroupBox2.Controls.Add(Me.Label1)
-		Me.GroupBox2.Controls.Add(Me.cmbLaunchAction)
-		Me.GroupBox2.Controls.Add(Me.chkNoFilePatching)
-		Me.GroupBox2.Controls.Add(Me.chkNoLogs)
-		Me.GroupBox2.Controls.Add(Me.tbarExThreads)
-		Me.GroupBox2.Controls.Add(Me.tBarCPUCount)
-		Me.GroupBox2.Controls.Add(Me.lblExThreads)
-		Me.GroupBox2.Controls.Add(Me.lblCPUCount)
-		Me.GroupBox2.Controls.Add(Me.chkExThreads)
-		Me.GroupBox2.Controls.Add(Me.lblVRAM)
-		Me.GroupBox2.Controls.Add(Me.tBarVRAM)
-		Me.GroupBox2.Controls.Add(Me.lblMem)
-		Me.GroupBox2.Controls.Add(Me.tbarMem)
-		Me.GroupBox2.Controls.Add(Me.chkCPU)
-		Me.GroupBox2.Controls.Add(Me.chkVRAM)
-		Me.GroupBox2.Controls.Add(Me.chkMem)
-		Me.GroupBox2.Controls.Add(Me.chkSkipIntro)
-		Me.GroupBox2.Controls.Add(Me.chkNoPause)
-		Me.GroupBox2.Controls.Add(Me.chkShowScriptErrors)
-		Me.GroupBox2.Controls.Add(Me.chkEmptyWorld)
-		Me.GroupBox2.Controls.Add(Me.chkNoSplash)
-		Me.GroupBox2.Location = New System.Drawing.Point(6, 298)
-		Me.GroupBox2.Name = "GroupBox2"
-		Me.GroupBox2.Size = New System.Drawing.Size(447, 294)
-		Me.GroupBox2.TabIndex = 10
-		Me.GroupBox2.TabStop = False
-		Me.GroupBox2.Text = "Additional Parameters"
-		'
 		'txtCustomParameters
 		'
 		Me.txtCustomParameters.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
 					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.txtCustomParameters.Location = New System.Drawing.Point(156, 263)
+		Me.txtCustomParameters.Location = New System.Drawing.Point(138, 251)
 		Me.txtCustomParameters.Name = "txtCustomParameters"
-		Me.txtCustomParameters.Size = New System.Drawing.Size(256, 22)
+		Me.txtCustomParameters.Size = New System.Drawing.Size(250, 22)
 		Me.txtCustomParameters.TabIndex = 32
 		'
 		'chkCustomArguments
 		'
 		Me.chkCustomArguments.AutoSize = True
-		Me.chkCustomArguments.Location = New System.Drawing.Point(27, 266)
+		Me.chkCustomArguments.Location = New System.Drawing.Point(6, 253)
 		Me.chkCustomArguments.Name = "chkCustomArguments"
 		Me.chkCustomArguments.Size = New System.Drawing.Size(127, 17)
 		Me.chkCustomArguments.TabIndex = 31
@@ -394,7 +327,7 @@ Partial Class frmMain
 		'
 		Me.chkProfileName.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkProfileName.AutoSize = True
-		Me.chkProfileName.Location = New System.Drawing.Point(27, 237)
+		Me.chkProfileName.Location = New System.Drawing.Point(6, 224)
 		Me.chkProfileName.Name = "chkProfileName"
 		Me.chkProfileName.Size = New System.Drawing.Size(94, 17)
 		Me.chkProfileName.TabIndex = 29
@@ -405,7 +338,7 @@ Partial Class frmMain
 		'
 		Me.chkCustomMemoryAllocator.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkCustomMemoryAllocator.AutoSize = True
-		Me.chkCustomMemoryAllocator.Location = New System.Drawing.Point(27, 210)
+		Me.chkCustomMemoryAllocator.Location = New System.Drawing.Point(6, 197)
 		Me.chkCustomMemoryAllocator.Name = "chkCustomMemoryAllocator"
 		Me.chkCustomMemoryAllocator.Size = New System.Drawing.Size(161, 17)
 		Me.chkCustomMemoryAllocator.TabIndex = 28
@@ -418,7 +351,7 @@ Partial Class frmMain
 		Me.cmbProfileName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.cmbProfileName.Enabled = False
 		Me.cmbProfileName.FormattingEnabled = True
-		Me.cmbProfileName.Location = New System.Drawing.Point(127, 234)
+		Me.cmbProfileName.Location = New System.Drawing.Point(106, 221)
 		Me.cmbProfileName.Name = "cmbProfileName"
 		Me.cmbProfileName.Size = New System.Drawing.Size(283, 21)
 		Me.cmbProfileName.TabIndex = 26
@@ -429,7 +362,7 @@ Partial Class frmMain
 		Me.cmbCustomMemoryAllocator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.cmbCustomMemoryAllocator.Enabled = False
 		Me.cmbCustomMemoryAllocator.FormattingEnabled = True
-		Me.cmbCustomMemoryAllocator.Location = New System.Drawing.Point(192, 207)
+		Me.cmbCustomMemoryAllocator.Location = New System.Drawing.Point(171, 194)
 		Me.cmbCustomMemoryAllocator.Name = "cmbCustomMemoryAllocator"
 		Me.cmbCustomMemoryAllocator.Size = New System.Drawing.Size(218, 21)
 		Me.cmbCustomMemoryAllocator.TabIndex = 24
@@ -438,7 +371,7 @@ Partial Class frmMain
 		'
 		Me.chkWindowed.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkWindowed.AutoSize = True
-		Me.chkWindowed.Location = New System.Drawing.Point(27, 182)
+		Me.chkWindowed.Location = New System.Drawing.Point(6, 169)
 		Me.chkWindowed.Name = "chkWindowed"
 		Me.chkWindowed.Size = New System.Drawing.Size(83, 17)
 		Me.chkWindowed.TabIndex = 23
@@ -448,7 +381,7 @@ Partial Class frmMain
 		'Label1
 		'
 		Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.Label1.Location = New System.Drawing.Point(195, 179)
+		Me.Label1.Location = New System.Drawing.Point(168, 167)
 		Me.Label1.Name = "Label1"
 		Me.Label1.Size = New System.Drawing.Size(98, 21)
 		Me.Label1.TabIndex = 22
@@ -461,7 +394,7 @@ Partial Class frmMain
 		Me.cmbLaunchAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.cmbLaunchAction.FormattingEnabled = True
 		Me.cmbLaunchAction.Items.AddRange(New Object() {"Nothing", "Minimize", "Close"})
-		Me.cmbLaunchAction.Location = New System.Drawing.Point(296, 180)
+		Me.cmbLaunchAction.Location = New System.Drawing.Point(275, 167)
 		Me.cmbLaunchAction.Name = "cmbLaunchAction"
 		Me.cmbLaunchAction.Size = New System.Drawing.Size(114, 21)
 		Me.cmbLaunchAction.TabIndex = 21
@@ -470,7 +403,7 @@ Partial Class frmMain
 		'
 		Me.chkNoFilePatching.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkNoFilePatching.AutoSize = True
-		Me.chkNoFilePatching.Location = New System.Drawing.Point(27, 159)
+		Me.chkNoFilePatching.Location = New System.Drawing.Point(6, 146)
 		Me.chkNoFilePatching.Name = "chkNoFilePatching"
 		Me.chkNoFilePatching.Size = New System.Drawing.Size(110, 17)
 		Me.chkNoFilePatching.TabIndex = 20
@@ -481,7 +414,7 @@ Partial Class frmMain
 		'
 		Me.chkNoLogs.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkNoLogs.AutoSize = True
-		Me.chkNoLogs.Location = New System.Drawing.Point(27, 136)
+		Me.chkNoLogs.Location = New System.Drawing.Point(6, 123)
 		Me.chkNoLogs.Name = "chkNoLogs"
 		Me.chkNoLogs.Size = New System.Drawing.Size(68, 17)
 		Me.chkNoLogs.TabIndex = 19
@@ -494,7 +427,7 @@ Partial Class frmMain
 		Me.tbarExThreads.AutoSize = False
 		Me.tbarExThreads.Enabled = False
 		Me.tbarExThreads.LargeChange = 1
-		Me.tbarExThreads.Location = New System.Drawing.Point(289, 133)
+		Me.tbarExThreads.Location = New System.Drawing.Point(250, 116)
 		Me.tbarExThreads.Maximum = 4
 		Me.tbarExThreads.Name = "tbarExThreads"
 		Me.tbarExThreads.Size = New System.Drawing.Size(99, 27)
@@ -507,7 +440,7 @@ Partial Class frmMain
 		Me.tBarCPUCount.AutoSize = False
 		Me.tBarCPUCount.Enabled = False
 		Me.tBarCPUCount.LargeChange = 1
-		Me.tBarCPUCount.Location = New System.Drawing.Point(289, 95)
+		Me.tBarCPUCount.Location = New System.Drawing.Point(250, 78)
 		Me.tBarCPUCount.Maximum = 4
 		Me.tBarCPUCount.Minimum = 1
 		Me.tBarCPUCount.Name = "tBarCPUCount"
@@ -521,7 +454,7 @@ Partial Class frmMain
 		Me.lblExThreads.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.lblExThreads.Enabled = False
 		Me.lblExThreads.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.lblExThreads.Location = New System.Drawing.Point(385, 139)
+		Me.lblExThreads.Location = New System.Drawing.Point(346, 122)
 		Me.lblExThreads.Name = "lblExThreads"
 		Me.lblExThreads.Size = New System.Drawing.Size(51, 14)
 		Me.lblExThreads.TabIndex = 18
@@ -533,7 +466,7 @@ Partial Class frmMain
 		Me.lblCPUCount.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.lblCPUCount.Enabled = False
 		Me.lblCPUCount.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.lblCPUCount.Location = New System.Drawing.Point(385, 101)
+		Me.lblCPUCount.Location = New System.Drawing.Point(346, 84)
 		Me.lblCPUCount.Name = "lblCPUCount"
 		Me.lblCPUCount.Size = New System.Drawing.Size(51, 14)
 		Me.lblCPUCount.TabIndex = 17
@@ -544,7 +477,7 @@ Partial Class frmMain
 		'
 		Me.chkExThreads.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkExThreads.AutoSize = True
-		Me.chkExThreads.Location = New System.Drawing.Point(198, 139)
+		Me.chkExThreads.Location = New System.Drawing.Point(159, 122)
 		Me.chkExThreads.Name = "chkExThreads"
 		Me.chkExThreads.Size = New System.Drawing.Size(97, 17)
 		Me.chkExThreads.TabIndex = 11
@@ -556,7 +489,7 @@ Partial Class frmMain
 		Me.lblVRAM.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.lblVRAM.Enabled = False
 		Me.lblVRAM.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.lblVRAM.Location = New System.Drawing.Point(385, 64)
+		Me.lblVRAM.Location = New System.Drawing.Point(346, 47)
 		Me.lblVRAM.Name = "lblVRAM"
 		Me.lblVRAM.Size = New System.Drawing.Size(51, 14)
 		Me.lblVRAM.TabIndex = 11
@@ -569,7 +502,7 @@ Partial Class frmMain
 		Me.tBarVRAM.AutoSize = False
 		Me.tBarVRAM.Enabled = False
 		Me.tBarVRAM.LargeChange = 1
-		Me.tBarVRAM.Location = New System.Drawing.Point(289, 58)
+		Me.tBarVRAM.Location = New System.Drawing.Point(250, 41)
 		Me.tBarVRAM.Maximum = 4
 		Me.tBarVRAM.Minimum = 1
 		Me.tBarVRAM.Name = "tBarVRAM"
@@ -583,7 +516,7 @@ Partial Class frmMain
 		Me.lblMem.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.lblMem.Enabled = False
 		Me.lblMem.ForeColor = System.Drawing.SystemColors.ControlText
-		Me.lblMem.Location = New System.Drawing.Point(385, 25)
+		Me.lblMem.Location = New System.Drawing.Point(346, 8)
 		Me.lblMem.Name = "lblMem"
 		Me.lblMem.Size = New System.Drawing.Size(51, 14)
 		Me.lblMem.TabIndex = 9
@@ -596,7 +529,7 @@ Partial Class frmMain
 		Me.tbarMem.AutoSize = False
 		Me.tbarMem.Enabled = False
 		Me.tbarMem.LargeChange = 1
-		Me.tbarMem.Location = New System.Drawing.Point(289, 19)
+		Me.tbarMem.Location = New System.Drawing.Point(250, 2)
 		Me.tbarMem.Maximum = 4
 		Me.tbarMem.Minimum = 1
 		Me.tbarMem.Name = "tbarMem"
@@ -609,7 +542,7 @@ Partial Class frmMain
 		'
 		Me.chkCPU.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkCPU.AutoSize = True
-		Me.chkCPU.Location = New System.Drawing.Point(198, 101)
+		Me.chkCPU.Location = New System.Drawing.Point(159, 84)
 		Me.chkCPU.Name = "chkCPU"
 		Me.chkCPU.Size = New System.Drawing.Size(85, 17)
 		Me.chkCPU.TabIndex = 9
@@ -620,7 +553,7 @@ Partial Class frmMain
 		'
 		Me.chkVRAM.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkVRAM.AutoSize = True
-		Me.chkVRAM.Location = New System.Drawing.Point(198, 64)
+		Me.chkVRAM.Location = New System.Drawing.Point(159, 47)
 		Me.chkVRAM.Name = "chkVRAM"
 		Me.chkVRAM.Size = New System.Drawing.Size(84, 17)
 		Me.chkVRAM.TabIndex = 7
@@ -631,7 +564,7 @@ Partial Class frmMain
 		'
 		Me.chkMem.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkMem.AutoSize = True
-		Me.chkMem.Location = New System.Drawing.Point(198, 25)
+		Me.chkMem.Location = New System.Drawing.Point(159, 8)
 		Me.chkMem.Name = "chkMem"
 		Me.chkMem.Size = New System.Drawing.Size(94, 17)
 		Me.chkMem.TabIndex = 5
@@ -642,7 +575,7 @@ Partial Class frmMain
 		'
 		Me.chkSkipIntro.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkSkipIntro.AutoSize = True
-		Me.chkSkipIntro.Location = New System.Drawing.Point(27, 113)
+		Me.chkSkipIntro.Location = New System.Drawing.Point(6, 100)
 		Me.chkSkipIntro.Name = "chkSkipIntro"
 		Me.chkSkipIntro.Size = New System.Drawing.Size(76, 17)
 		Me.chkSkipIntro.TabIndex = 4
@@ -653,7 +586,7 @@ Partial Class frmMain
 		'
 		Me.chkNoPause.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkNoPause.AutoSize = True
-		Me.chkNoPause.Location = New System.Drawing.Point(27, 90)
+		Me.chkNoPause.Location = New System.Drawing.Point(6, 77)
 		Me.chkNoPause.Name = "chkNoPause"
 		Me.chkNoPause.Size = New System.Drawing.Size(153, 17)
 		Me.chkNoPause.TabIndex = 3
@@ -664,7 +597,7 @@ Partial Class frmMain
 		'
 		Me.chkShowScriptErrors.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkShowScriptErrors.AutoSize = True
-		Me.chkShowScriptErrors.Location = New System.Drawing.Point(27, 67)
+		Me.chkShowScriptErrors.Location = New System.Drawing.Point(6, 54)
 		Me.chkShowScriptErrors.Name = "chkShowScriptErrors"
 		Me.chkShowScriptErrors.Size = New System.Drawing.Size(120, 17)
 		Me.chkShowScriptErrors.TabIndex = 2
@@ -675,7 +608,7 @@ Partial Class frmMain
 		'
 		Me.chkEmptyWorld.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkEmptyWorld.AutoSize = True
-		Me.chkEmptyWorld.Location = New System.Drawing.Point(27, 44)
+		Me.chkEmptyWorld.Location = New System.Drawing.Point(6, 31)
 		Me.chkEmptyWorld.Name = "chkEmptyWorld"
 		Me.chkEmptyWorld.Size = New System.Drawing.Size(133, 17)
 		Me.chkEmptyWorld.TabIndex = 1
@@ -686,7 +619,7 @@ Partial Class frmMain
 		'
 		Me.chkNoSplash.Anchor = System.Windows.Forms.AnchorStyles.Top
 		Me.chkNoSplash.AutoSize = True
-		Me.chkNoSplash.Location = New System.Drawing.Point(27, 21)
+		Me.chkNoSplash.Location = New System.Drawing.Point(6, 8)
 		Me.chkNoSplash.Name = "chkNoSplash"
 		Me.chkNoSplash.Size = New System.Drawing.Size(115, 17)
 		Me.chkNoSplash.TabIndex = 0
@@ -697,9 +630,9 @@ Partial Class frmMain
 		'
 		Me.btnLaunch.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
 		Me.btnLaunch.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.btnLaunch.Location = New System.Drawing.Point(5, 598)
+		Me.btnLaunch.Location = New System.Drawing.Point(4, 328)
 		Me.btnLaunch.Name = "btnLaunch"
-		Me.btnLaunch.Size = New System.Drawing.Size(88, 40)
+		Me.btnLaunch.Size = New System.Drawing.Size(72, 40)
 		Me.btnLaunch.TabIndex = 11
 		Me.btnLaunch.Text = "&Launch"
 		Me.btnLaunch.UseVisualStyleBackColor = True
@@ -708,21 +641,21 @@ Partial Class frmMain
 		'
 		Me.txtLaunchString.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
 					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-		Me.txtLaunchString.Location = New System.Drawing.Point(100, 599)
+		Me.txtLaunchString.Location = New System.Drawing.Point(82, 329)
 		Me.txtLaunchString.Multiline = True
 		Me.txtLaunchString.Name = "txtLaunchString"
 		Me.txtLaunchString.ReadOnly = True
 		Me.txtLaunchString.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal
-		Me.txtLaunchString.Size = New System.Drawing.Size(353, 38)
+		Me.txtLaunchString.Size = New System.Drawing.Size(322, 38)
 		Me.txtLaunchString.TabIndex = 12
 		Me.txtLaunchString.WordWrap = False
 		'
 		'StatusStrip1
 		'
 		Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.txtStatus})
-		Me.StatusStrip1.Location = New System.Drawing.Point(0, 642)
+		Me.StatusStrip1.Location = New System.Drawing.Point(0, 372)
 		Me.StatusStrip1.Name = "StatusStrip1"
-		Me.StatusStrip1.Size = New System.Drawing.Size(458, 22)
+		Me.StatusStrip1.Size = New System.Drawing.Size(409, 22)
 		Me.StatusStrip1.SizingGrip = False
 		Me.StatusStrip1.TabIndex = 13
 		Me.StatusStrip1.Text = "StatusStrip1"
@@ -740,7 +673,7 @@ Partial Class frmMain
 		Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
 		Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
 		Me.ToolStrip1.Name = "ToolStrip1"
-		Me.ToolStrip1.Size = New System.Drawing.Size(458, 25)
+		Me.ToolStrip1.Size = New System.Drawing.Size(409, 25)
 		Me.ToolStrip1.Stretch = True
 		Me.ToolStrip1.TabIndex = 0
 		Me.ToolStrip1.Text = "ToolStrip1"
@@ -792,7 +725,7 @@ Partial Class frmMain
 		'
 		'ToolStripDropDownButton3
 		'
-		Me.ToolStripDropDownButton3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsiSetAltLoc, Me.tsiRunBattlEye})
+		Me.ToolStripDropDownButton3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsiSetAltLoc, Me.tsiRunBattlEye, Me.tsiRunThroughSteam, Me.ToolStripSeparator1, Me.MemoryAllocatorToolStripMenuItem, Me.ResetSettingsToolStripMenuItem})
 		Me.ToolStripDropDownButton3.Image = Global.Arma3ModPresetLauncher.My.Resources.Resources.options_16px
 		Me.ToolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.ToolStripDropDownButton3.Name = "ToolStripDropDownButton3"
@@ -813,6 +746,39 @@ Partial Class frmMain
 		Me.tsiRunBattlEye.Name = "tsiRunBattlEye"
 		Me.tsiRunBattlEye.Size = New System.Drawing.Size(193, 22)
 		Me.tsiRunBattlEye.Text = "Run BattlEye"
+		'
+		'tsiRunThroughSteam
+		'
+		Me.tsiRunThroughSteam.Checked = True
+		Me.tsiRunThroughSteam.CheckOnClick = True
+		Me.tsiRunThroughSteam.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.tsiRunThroughSteam.Name = "tsiRunThroughSteam"
+		Me.tsiRunThroughSteam.Size = New System.Drawing.Size(193, 22)
+		Me.tsiRunThroughSteam.Text = "Run Through Steam"
+		'
+		'ToolStripSeparator1
+		'
+		Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+		Me.ToolStripSeparator1.Size = New System.Drawing.Size(190, 6)
+		'
+		'MemoryAllocatorToolStripMenuItem
+		'
+		Me.MemoryAllocatorToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NoneToolStripMenuItem})
+		Me.MemoryAllocatorToolStripMenuItem.Name = "MemoryAllocatorToolStripMenuItem"
+		Me.MemoryAllocatorToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+		Me.MemoryAllocatorToolStripMenuItem.Text = "Memory Allocator"
+		'
+		'NoneToolStripMenuItem
+		'
+		Me.NoneToolStripMenuItem.Name = "NoneToolStripMenuItem"
+		Me.NoneToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
+		Me.NoneToolStripMenuItem.Text = "None"
+		'
+		'ResetSettingsToolStripMenuItem
+		'
+		Me.ResetSettingsToolStripMenuItem.Name = "ResetSettingsToolStripMenuItem"
+		Me.ResetSettingsToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+		Me.ResetSettingsToolStripMenuItem.Text = "Reset Settings"
 		'
 		'ToolStripDropDownButton2
 		'
@@ -846,31 +812,94 @@ Partial Class frmMain
 		Me.FileSystemWatcher1.EnableRaisingEvents = True
 		Me.FileSystemWatcher1.SynchronizingObject = Me
 		'
+		'tabPanel
+		'
+		Me.tabPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+					Or System.Windows.Forms.AnchorStyles.Left) _
+					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+		Me.tabPanel.Controls.Add(Me.tabModPresets)
+		Me.tabPanel.Controls.Add(Me.tabParameters)
+		Me.tabPanel.Location = New System.Drawing.Point(2, 24)
+		Me.tabPanel.Name = "tabPanel"
+		Me.tabPanel.SelectedIndex = 0
+		Me.tabPanel.Size = New System.Drawing.Size(406, 301)
+		Me.tabPanel.TabIndex = 14
+		'
+		'tabModPresets
+		'
+		Me.tabModPresets.BackColor = System.Drawing.SystemColors.Control
+		Me.tabModPresets.Controls.Add(Me.TableLayoutPanel1)
+		Me.tabModPresets.Controls.Add(Me.cmbPreset)
+		Me.tabModPresets.Controls.Add(Me.btnRename)
+		Me.tabModPresets.Controls.Add(Me.btnDelete)
+		Me.tabModPresets.Controls.Add(Me.btnDuplicate)
+		Me.tabModPresets.Controls.Add(Me.btnNew)
+		Me.tabModPresets.Location = New System.Drawing.Point(4, 22)
+		Me.tabModPresets.Name = "tabModPresets"
+		Me.tabModPresets.Padding = New System.Windows.Forms.Padding(3)
+		Me.tabModPresets.Size = New System.Drawing.Size(398, 275)
+		Me.tabModPresets.TabIndex = 0
+		Me.tabModPresets.Text = "Mod Presets"
+		'
+		'tabParameters
+		'
+		Me.tabParameters.BackColor = System.Drawing.SystemColors.Control
+		Me.tabParameters.Controls.Add(Me.txtCustomParameters)
+		Me.tabParameters.Controls.Add(Me.chkNoSplash)
+		Me.tabParameters.Controls.Add(Me.chkCustomArguments)
+		Me.tabParameters.Controls.Add(Me.chkEmptyWorld)
+		Me.tabParameters.Controls.Add(Me.chkProfileName)
+		Me.tabParameters.Controls.Add(Me.chkShowScriptErrors)
+		Me.tabParameters.Controls.Add(Me.chkCustomMemoryAllocator)
+		Me.tabParameters.Controls.Add(Me.chkNoPause)
+		Me.tabParameters.Controls.Add(Me.cmbProfileName)
+		Me.tabParameters.Controls.Add(Me.chkSkipIntro)
+		Me.tabParameters.Controls.Add(Me.cmbCustomMemoryAllocator)
+		Me.tabParameters.Controls.Add(Me.chkMem)
+		Me.tabParameters.Controls.Add(Me.chkWindowed)
+		Me.tabParameters.Controls.Add(Me.chkVRAM)
+		Me.tabParameters.Controls.Add(Me.Label1)
+		Me.tabParameters.Controls.Add(Me.chkCPU)
+		Me.tabParameters.Controls.Add(Me.cmbLaunchAction)
+		Me.tabParameters.Controls.Add(Me.tbarMem)
+		Me.tabParameters.Controls.Add(Me.chkNoFilePatching)
+		Me.tabParameters.Controls.Add(Me.lblMem)
+		Me.tabParameters.Controls.Add(Me.chkNoLogs)
+		Me.tabParameters.Controls.Add(Me.tBarVRAM)
+		Me.tabParameters.Controls.Add(Me.tbarExThreads)
+		Me.tabParameters.Controls.Add(Me.lblVRAM)
+		Me.tabParameters.Controls.Add(Me.tBarCPUCount)
+		Me.tabParameters.Controls.Add(Me.chkExThreads)
+		Me.tabParameters.Controls.Add(Me.lblExThreads)
+		Me.tabParameters.Controls.Add(Me.lblCPUCount)
+		Me.tabParameters.Location = New System.Drawing.Point(4, 22)
+		Me.tabParameters.Name = "tabParameters"
+		Me.tabParameters.Padding = New System.Windows.Forms.Padding(3)
+		Me.tabParameters.Size = New System.Drawing.Size(398, 281)
+		Me.tabParameters.TabIndex = 1
+		Me.tabParameters.Text = "Parameters"
+		'
 		'frmMain
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(458, 664)
+		Me.ClientSize = New System.Drawing.Size(409, 394)
+		Me.Controls.Add(Me.tabPanel)
 		Me.Controls.Add(Me.StatusStrip1)
 		Me.Controls.Add(Me.txtLaunchString)
 		Me.Controls.Add(Me.btnLaunch)
-		Me.Controls.Add(Me.GroupBox2)
-		Me.Controls.Add(Me.GroupBox1)
 		Me.Controls.Add(Me.ToolStrip1)
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
 		Me.MaximizeBox = False
 		Me.MaximumSize = New System.Drawing.Size(1080, 1920)
-		Me.MinimumSize = New System.Drawing.Size(472, 700)
+		Me.MinimumSize = New System.Drawing.Size(423, 193)
 		Me.Name = "frmMain"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
 		Me.Text = "Arma 3 Mod Preset Launcher - v1.2.3"
-		Me.GroupBox1.ResumeLayout(False)
 		Me.TableLayoutPanel1.ResumeLayout(False)
 		Me.Panel1.ResumeLayout(False)
 		Me.gbCurrent.ResumeLayout(False)
 		Me.gbAll.ResumeLayout(False)
-		Me.GroupBox2.ResumeLayout(False)
-		Me.GroupBox2.PerformLayout()
 		CType(Me.tbarExThreads, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.tBarCPUCount, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.tBarVRAM, System.ComponentModel.ISupportInitialize).EndInit()
@@ -880,6 +909,10 @@ Partial Class frmMain
 		Me.ToolStrip1.ResumeLayout(False)
 		Me.ToolStrip1.PerformLayout()
 		CType(Me.FileSystemWatcher1, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.tabPanel.ResumeLayout(False)
+		Me.tabModPresets.ResumeLayout(False)
+		Me.tabParameters.ResumeLayout(False)
+		Me.tabParameters.PerformLayout()
 		Me.ResumeLayout(False)
 		Me.PerformLayout()
 
@@ -892,8 +925,6 @@ Partial Class frmMain
 	Friend WithEvents btnDelete As System.Windows.Forms.Button
 	Friend WithEvents btnPresetAdd As System.Windows.Forms.Button
 	Friend WithEvents btnPresetRemove As System.Windows.Forms.Button
-	Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-	Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
 	Friend WithEvents chkCPU As System.Windows.Forms.CheckBox
 	Friend WithEvents chkVRAM As System.Windows.Forms.CheckBox
 	Friend WithEvents chkMem As System.Windows.Forms.CheckBox
@@ -923,8 +954,6 @@ Partial Class frmMain
 	Friend WithEvents colModsCurrent As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvModsAll As System.Windows.Forms.ListView
 	Friend WithEvents colModsAll As System.Windows.Forms.ColumnHeader
-	Friend WithEvents btnDown As System.Windows.Forms.Button
-	Friend WithEvents btnUp As System.Windows.Forms.Button
 	Friend WithEvents InStartMenuToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents InSteamLibraryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents btnGroups As System.Windows.Forms.Button
@@ -953,5 +982,13 @@ Partial Class frmMain
 	Friend WithEvents tsiRunBattlEye As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents txtCustomParameters As System.Windows.Forms.TextBox
 	Friend WithEvents chkCustomArguments As System.Windows.Forms.CheckBox
+	Friend WithEvents tsiRunThroughSteam As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+	Friend WithEvents MemoryAllocatorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents NoneToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents tabPanel As System.Windows.Forms.TabControl
+	Friend WithEvents tabModPresets As System.Windows.Forms.TabPage
+	Friend WithEvents tabParameters As System.Windows.Forms.TabPage
+	Friend WithEvents ResetSettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

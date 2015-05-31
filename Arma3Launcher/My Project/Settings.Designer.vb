@@ -306,7 +306,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("450, 620")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("423, 440")>  _
         Public Property Size() As Global.System.Drawing.Size
             Get
                 Return CType(Me("Size"),Global.System.Drawing.Size)
@@ -444,6 +444,18 @@ Namespace My
             End Get
             Set
                 Me("CustomArgumentsEnabled") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property RunThroughSteam() As Boolean
+            Get
+                Return CType(Me("RunThroughSteam"),Boolean)
+            End Get
+            Set
+                Me("RunThroughSteam") = value
             End Set
         End Property
     End Class

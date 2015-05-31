@@ -12,7 +12,7 @@ Public Class frmMain
 
 	'Constants
 	Protected Friend ReadOnly activeColor As Integer = 160 'Gray highlight brightness (0-255)
-	Protected Friend ReadOnly frmMainDefaultSize = New Size(450, 620)
+	Protected Friend ReadOnly frmMainDefaultSize = New Size(423, 440)
 
 	Private dragger As DragManager
 
@@ -30,6 +30,7 @@ Public Class frmMain
 		End Try
 
 		'Couldn't find Steam installed
+
 		If IsNothing(steamExe) Then
 			MessageBox.Show(
 			 "Could not find Steam installation. The launcher will now exit.",
@@ -62,9 +63,109 @@ Public Class frmMain
 		addParameterTooltips()
 
 		loadWindowSizeLoc()
+	End Sub
 
-		'lvModsAll.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent)
-		'lvModsCurrent.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent)
+	Private Sub frmMain_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
+
+		' =========================== DEBUG ===========================================
+		My.Settings.A3Path = "E:\Steam\steamapps\common\Arma 3\" + getExecutable()
+		' =============================================================================
+
+		If My.Settings.A3Path Is Nothing Or My.Settings.A3Path = "" Then
+			My.Settings.A3Path = locateA3()
+		ElseIf Not File.Exists(My.Settings.A3Path) Then
+			My.Settings.A3Path = relocateA3()
+		End If
+
+		If My.Settings.A3Path = "" Then Application.Exit()
+
+		refreshPresetCmb()
+
+		updateAllModsList()
+
+		If IsNothing(My.Settings.CurrentPreset) Or My.Settings.CurrentPreset Is "" Then
+			My.Settings.CurrentPreset = cmbPreset.Items(0).ToString()
+			My.Settings.Save()
+			cmbPreset.SelectedIndex = 0
+			Console.WriteLine("CurrentPreset Empty, setting to first: " + My.Settings.CurrentPreset)
+		Else
+			If cmbPreset.Items.Contains(My.Settings.CurrentPreset) Then
+				Console.WriteLine("Found CurrentPreset: " + My.Settings.CurrentPreset)
+				cmbPreset.SelectedIndex = cmbPreset.FindStringExact(My.Settings.CurrentPreset)
+			Else
+				Console.WriteLine("CurrentPreset not found, resetting")
+				cmbPreset.SelectedIndex = 0
+			End If
+		End If
+
+		chkNoSplash.Checked = My.Settings.NoSplashScreen
+		chkEmptyWorld.Checked = My.Settings.EmptyWorld
+		chkShowScriptErrors.Checked = My.Settings.ShowScriptErrors
+		chkNoPause.Checked = My.Settings.NoPause
+		chkSkipIntro.Checked = My.Settings.SkipIntro
+		chkNoLogs.Checked = My.Settings.NoLogs
+		chkNoFilePatching.Checked = My.Settings.NoFilePatching
+		chkWindowed.Checked = My.Settings.Windowed
+		chkCustomArguments.Checked = My.Settings.CustomArgumentsEnabled
+		txtCustomParameters.Text = My.Settings.CustomArguments
+		tsiRunThroughSteam.Checked = My.Settings.RunThroughSteam
+		tsiRunBattlEye.Checked = My.Settings.RunBattlEye
+
+
+		chkMem.Checked = My.Settings.MaxMemEnabled
+		If chkMem.Checked Then
+			tbarMem.Enabled = True
+			tbarMem.Value = My.Settings.MaxMem
+			'lblMem.Text = valueToRam(tbarMem.Value).ToString + " MB"
+		End If
+
+		chkVRAM.Checked = My.Settings.MaxVRAMEnabled
+		If chkVRAM.Checked Then
+			tBarVRAM.Enabled = True
+			tBarVRAM.Value = My.Settings.MaxVRAM
+			'lblVRAM.Text = valueToRam(tBarVRAM.Value).ToString + " MB"
+		End If
+
+		chkCPU.Checked = My.Settings.CPUEnabled
+		If chkCPU.Checked Then
+			tBarCPUCount.Enabled = True
+			tBarCPUCount.Value = My.Settings.CPUCount / 2
+		End If
+
+		chkExThreads.Checked = My.Settings.ExThreadsEnable
+		If chkExThreads.Checked Then
+			tbarExThreads.Enabled = True
+			tbarExThreads.Value = My.Settings.ExThreads
+		End If
+
+		If IsNothing(My.Settings.LaunchAction) Then
+			My.Settings.LaunchAction = "Nothing"
+		End If
+		cmbLaunchAction.SelectedIndex = cmbLaunchAction.FindStringExact(My.Settings.LaunchAction)
+
+		chkCustomMemoryAllocator.Checked = My.Settings.CustomMemoryAllocatorEnabled
+		If chkCustomMemoryAllocator.Checked Then
+			cmbCustomMemoryAllocator.Enabled = True
+			refreshMemAllocators()
+		End If
+
+		chkProfileName.Checked = My.Settings.ProfileNameEnabled
+		If chkProfileName.Checked Then
+			cmbProfileName.Enabled = True
+			refreshProfiles()
+		End If
+
+		setStatus("Successfully loaded " + lvModsAll.Items.Count.ToString + " mods and " + cmbPreset.Items.Count.ToString + " presets", True)
+
+		lvModsAll.Columns.Item(0).Width = -2
+		lvModsCurrent.Columns.Item(0).Width = -2
+
+		checkForMissingMods()
+
+		refreshMemAllocators()
+
+		lvModsAll.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+		lvModsCurrent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
 	End Sub
 
 	Private Sub addParameterTooltips()
@@ -250,106 +351,11 @@ Public Class frmMain
 		End If
 	End Function
 
-	Private Sub frmMain_FormClosing(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.FormClosing
-		savePresets()
-		saveWindowSizeLoc()
-		Application.Exit()
-	End Sub
-
-	Private Sub frmMain_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-		If My.Settings.A3Path Is Nothing Or My.Settings.A3Path = "" Then
-			My.Settings.A3Path = locateA3()
-		ElseIf Not File.Exists(My.Settings.A3Path) Then
-			My.Settings.A3Path = relocateA3()
+	Private Sub frmMain_FormClosing(ByVal sender As System.Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+		If e.CloseReason <> CloseReason.ApplicationExitCall Then
+			savePresets()
+			saveWindowSizeLoc()
 		End If
-
-		If My.Settings.A3Path = "" Then Application.Exit()
-
-		refreshPresetCmb()
-
-		updateAllModsList()
-
-		If IsNothing(My.Settings.CurrentPreset) Or My.Settings.CurrentPreset Is "" Then
-			My.Settings.CurrentPreset = cmbPreset.Items(0).ToString()
-			My.Settings.Save()
-			cmbPreset.SelectedIndex = 0
-			Console.WriteLine("CurrentPreset Empty, setting to first: " + My.Settings.CurrentPreset)
-		Else
-			If cmbPreset.Items.Contains(My.Settings.CurrentPreset) Then
-				Console.WriteLine("Found CurrentPreset: " + My.Settings.CurrentPreset)
-				cmbPreset.SelectedIndex = cmbPreset.FindStringExact(My.Settings.CurrentPreset)
-			Else
-				Console.WriteLine("CurrentPreset not found, resetting")
-				cmbPreset.SelectedIndex = 0
-			End If
-		End If
-
-		chkNoSplash.Checked = My.Settings.NoSplashScreen
-		chkEmptyWorld.Checked = My.Settings.EmptyWorld
-		chkShowScriptErrors.Checked = My.Settings.ShowScriptErrors
-		chkNoPause.Checked = My.Settings.NoPause
-		chkSkipIntro.Checked = My.Settings.SkipIntro
-		chkNoLogs.Checked = My.Settings.NoLogs
-		chkNoFilePatching.Checked = My.Settings.NoFilePatching
-		chkWindowed.Checked = My.Settings.Windowed
-		chkCustomArguments.Checked = My.Settings.CustomArgumentsEnabled
-		txtCustomParameters.Text = My.Settings.CustomArguments
-
-
-		chkMem.Checked = My.Settings.MaxMemEnabled
-		If chkMem.Checked Then
-			tbarMem.Enabled = True
-			tbarMem.Value = My.Settings.MaxMem
-			'lblMem.Text = valueToRam(tbarMem.Value).ToString + " MB"
-		End If
-
-		chkVRAM.Checked = My.Settings.MaxVRAMEnabled
-		If chkVRAM.Checked Then
-			tBarVRAM.Enabled = True
-			tBarVRAM.Value = My.Settings.MaxVRAM
-			'lblVRAM.Text = valueToRam(tBarVRAM.Value).ToString + " MB"
-		End If
-
-		chkCPU.Checked = My.Settings.CPUEnabled
-		If chkCPU.Checked Then
-			tBarCPUCount.Enabled = True
-			tBarCPUCount.Value = My.Settings.CPUCount / 2
-		End If
-
-		chkExThreads.Checked = My.Settings.ExThreadsEnable
-		If chkExThreads.Checked Then
-			tbarExThreads.Enabled = True
-			tbarExThreads.Value = My.Settings.ExThreads
-		End If
-
-		If IsNothing(My.Settings.LaunchAction) Then
-			My.Settings.LaunchAction = "Nothing"
-		End If
-		cmbLaunchAction.SelectedIndex = cmbLaunchAction.FindStringExact(My.Settings.LaunchAction)
-
-		chkCustomMemoryAllocator.Checked = My.Settings.CustomMemoryAllocatorEnabled
-		If chkCustomMemoryAllocator.Checked Then
-			cmbCustomMemoryAllocator.Enabled = True
-			refreshMemAllocators()
-		End If
-
-		chkProfileName.Checked = My.Settings.ProfileNameEnabled
-		If chkProfileName.Checked Then
-			cmbProfileName.Enabled = True
-			refreshProfiles()
-		End If
-
-		setStatus("Successfully loaded " + lvModsAll.Items.Count.ToString + " mods and " + cmbPreset.Items.Count.ToString + " presets", True)
-
-		lvModsAll.Columns.Item(0).Width = -2
-		lvModsCurrent.Columns.Item(0).Width = -2
-
-		checkForMissingMods()
-
-		refreshMemAllocators()
-
-		lvModsAll.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
-		lvModsCurrent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
 	End Sub
 
 	Private Function locateA3()
@@ -609,7 +615,7 @@ Public Class frmMain
 	'	End If
 	'End Sub
 
-	Private Sub btnUp_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles btnUp.MouseUp
+	Private Sub btnUp_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
 		moveSelectedItemUp()
 	End Sub
 
@@ -641,7 +647,7 @@ Public Class frmMain
 		End If
 	End Sub
 
-	Private Sub btnDown_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles btnDown.MouseUp
+	Private Sub btnDown_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
 		moveSelectedItemDown()
 	End Sub
 
@@ -770,6 +776,16 @@ Public Class frmMain
 		Dim modString As String = "-mod="
 		Dim groupedAddedMods As New ArrayList
 
+		If My.Settings.RunThroughSteam Then
+			launchParams.Add("-noLauncher")
+
+			If My.Settings.RunBattlEye Then
+				launchParams.Add("-useBE")
+			End If
+		End If
+
+		
+
 		If (lvModsCurrent.Items.Count > 0 And lvModsCurrent.Items.IndexOfKey("") <> 0) Then
 			For Each item As ListViewItem In lvModsCurrent.Items
 				If (item.Text.StartsWith("@")) Then	'item is a single mod
@@ -859,24 +875,24 @@ Public Class frmMain
 		If My.Settings.ExThreadsEnable Then launchParams.Add("-ExThreads=" + lblExThreads.Text)
 		If My.Settings.CustomArgumentsEnabled Then launchParams.Add(txtCustomParameters.Text)
 
-		If cmbCustomMemoryAllocator.SelectedItem <> "None" And Not IsNothing(cmbCustomMemoryAllocator.SelectedItem) Then
+		If My.Settings.CustomMemoryAllocatorEnabled Then
 			launchParams.Add("-malloc=" + cmbCustomMemoryAllocator.Text.ToLower())
 		End If
 
-		If cmbProfileName.SelectedItem <> "None" And Not IsNothing(cmbProfileName.SelectedItem) Then
+		If My.Settings.ProfileNameEnabled Then
 			launchParams.Add("-name=""" + cmbProfileName.Text + """")
-		End If
-
-		If My.Settings.RunBattlEye Then
-			launchParams.Insert(0, "0")
-			launchParams.Insert(1, "1")
 		End If
 
 		launchString = String.Join(" ", launchParams.ToArray)
 
-		txtLaunchString.Text = My.Settings.A3Path + " "
+		If My.Settings.RunThroughSteam Then
+			txtLaunchString.Text = steamExe + " -applaunch 107410 "
+		Else
+			txtLaunchString.Text = My.Settings.A3Path + " "
+		End If
 
 		txtLaunchString.Text += launchString
+		ResetListViewColumnWidths()
 	End Sub
 
 	Private Function modIsActiveInGroup(ByVal _mod As String) As Boolean
@@ -951,7 +967,7 @@ Public Class frmMain
 		Dim modsAdded As New ArrayList
 		modsAdded.AddRange(modsToAdd)
 		For Each m As ListViewItem In modsToAdd
-			Dim modname = m.Text
+			Dim modname = m.Tag
 			If Not preset.Contains(modname) And modname <> "" Then
 				preset.Add(modname)
 				numAdded += 1
@@ -1109,11 +1125,13 @@ Public Class frmMain
 		My.Settings.CustomMemoryAllocatorEnabled = chkCustomMemoryAllocator.Checked
 		My.Settings.Save()
 		If Not chkCustomMemoryAllocator.Checked Then
-			cmbCustomMemoryAllocator.Text = ""
+			cmbCustomMemoryAllocator.Items.Clear()
+		Else
+			refreshMemAllocators()
 		End If
 		cmbCustomMemoryAllocator.Enabled = chkCustomMemoryAllocator.Checked
 		statusChk("Custom Memory Allocator", chkCustomMemoryAllocator.Checked, True)
-		refreshMemAllocators()
+		updateLaunchStringAndColors()
 	End Sub
 
 	Private Sub chkProfileName_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkProfileName.CheckedChanged
@@ -1121,11 +1139,13 @@ Public Class frmMain
 		My.Settings.ProfileNameEnabled = chkProfileName.Checked
 		My.Settings.Save()
 		If Not chkProfileName.Checked Then
-			cmbProfileName.Text = ""
+			cmbProfileName.Items.Clear()
+		Else
+			refreshProfiles()
 		End If
 		cmbProfileName.Enabled = chkProfileName.Checked
 		statusChk("Profile Name", chkProfileName.Checked, True)
-		refreshProfiles()
+		updateLaunchStringAndColors()
 	End Sub
 
 	Private Sub chkCustomArguments_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkCustomArguments.CheckedChanged
@@ -1293,9 +1313,15 @@ Public Class frmMain
 		'MsgBox("steam://rungameid/107410" + launchString)
 
 		Dim p As New Process
-		p.StartInfo.WorkingDirectory = My.Settings.A3Path.Substring(0, My.Settings.A3Path.LastIndexOf("\"))
-		p.StartInfo.FileName = My.Settings.A3Path
-		p.StartInfo.Arguments = launchString
+		'p.StartInfo.WorkingDirectory = My.Settings.A3Path.Substring(0, My.Settings.A3Path.LastIndexOf("\"))
+
+		Console.WriteLine("Launch")
+		p.StartInfo.WorkingDirectory = steamExe.Substring(0, steamExe.LastIndexOf("\"))
+		Console.WriteLine("Working Directory: " + steamExe.Substring(0, steamExe.LastIndexOf("\")))
+		p.StartInfo.FileName = "steam.exe"
+		Console.WriteLine("FileName: " + "steam.exe")
+		p.StartInfo.Arguments = "-applaunch 107410 " + launchString
+		Console.WriteLine("Arguments: " + "-applaunch 107410 " + launchString)
 		p.Start()
 		'Process.Start(txtLaunchString.Text.Substring(0, txtLaunchString.Text.IndexOf(" -mod")), txtLaunchString.Text.Substring(txtLaunchString.Text.IndexOf(" -mod")))
 
@@ -1547,7 +1573,30 @@ Public Class frmMain
 	End Sub
 
 	Private Sub frmMain_Resize(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Resize
+		ResetListViewColumnWidths()
+	End Sub
+
+	Private Sub frmMain_ResizeEnd(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ResizeEnd
+		saveWindowSizeLoc()
+	End Sub
+
+	Private Sub ResetListViewColumnWidths()
 		lvModsAll.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
 		lvModsCurrent.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+	End Sub
+
+	Private Sub ResetSettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ResetSettingsToolStripMenuItem.Click
+		Dim dialog = MessageBox.Show("Warning: This cannot be undone!", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation)
+		If dialog = DialogResult.OK Then
+			My.Settings.Reset()
+			My.Settings.Save()
+			Application.Exit()
+		End If
+	End Sub
+
+	Private Sub tsiRunThroughSteam_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsiRunThroughSteam.Click
+		My.Settings.RunThroughSteam = tsiRunThroughSteam.Checked
+		My.Settings.Save()
+		updateLaunchStringAndColors()
 	End Sub
 End Class

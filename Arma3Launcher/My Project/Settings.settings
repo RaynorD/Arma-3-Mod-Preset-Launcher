@@ -66,7 +66,7 @@
       <Value Profile="(Default)">-1000, -1000</Value>
     </Setting>
     <Setting Name="Size" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">450, 620</Value>
+      <Value Profile="(Default)">423, 440</Value>
     </Setting>
     <Setting Name="GroupSize" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">450, 380</Value>
@@ -100,6 +100,9 @@
     </Setting>
     <Setting Name="CustomArgumentsEnabled" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RunThroughSteam" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
