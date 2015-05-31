@@ -79,6 +79,12 @@ Public Class frmMain
 
 		If My.Settings.A3Path = "" Then Application.Exit()
 
+		If My.Settings.RunBattlEye Then
+			Dim path = My.Settings.A3Path
+			path = path.Substring(0, path.LastIndexOf("\") + 1) + getExecutable()
+			My.Settings.A3Path = path
+		End If
+
 		refreshPresetCmb()
 
 		updateAllModsList()
@@ -365,7 +371,7 @@ Public Class frmMain
 
 		'check if arma installed inside
 		If (File.Exists(steamPath + "\steamapps\common\Arma 3\arma3.exe")) Then	'return path and skip input dialog
-			path = steamPath + "\steamapps\common\Arma 3\arma3.exe"
+			path = steamPath + "\steamapps\common\Arma 3\" + getExecutable()
 
 			MessageBox.Show(
 			  "Detected Arma 3 Installation at:" + vbCrLf + vbCrLf + path + vbCrLf + vbCrLf + "Loading mods...",
