@@ -875,7 +875,7 @@ Partial Class frmMain
 		Me.tabParameters.Location = New System.Drawing.Point(4, 22)
 		Me.tabParameters.Name = "tabParameters"
 		Me.tabParameters.Padding = New System.Windows.Forms.Padding(3)
-		Me.tabParameters.Size = New System.Drawing.Size(398, 281)
+		Me.tabParameters.Size = New System.Drawing.Size(398, 38)
 		Me.tabParameters.TabIndex = 1
 		Me.tabParameters.Text = "Parameters"
 		'
@@ -892,7 +892,7 @@ Partial Class frmMain
 		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
 		Me.MaximizeBox = False
 		Me.MaximumSize = New System.Drawing.Size(1080, 1920)
-		Me.MinimumSize = New System.Drawing.Size(423, 193)
+		Me.MinimumSize = New System.Drawing.Size(423, 187)
 		Me.Name = "frmMain"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
 		Me.Text = "Arma 3 Mod Preset Launcher - v1.2.3"
