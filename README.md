@@ -4,6 +4,9 @@ An intuitive, fully featured launcher for Arma 3
 **Changelog**
 
 v1.2.3 - In development
+- Changed to tabbed layout
+- Fixed: Running game with battleye active
+- Fixed: Option to run via steam client command or direct arma3.exe/arma3battleye.exe
 - Added: -malloc parameter (lists any dlls in Arma 3/Dlls)
 - Added: -name parameter (Select profile)
 - Added: Option to run Battleye (On by default, Fixes "battleye is not running" issue)
@@ -11,6 +14,7 @@ v1.2.3 - In development
 - Fixed: Listviews now handle horizontal resizing better
 - Fixed: Adjusted wording of some tooltips to be clearer
 - Changed: List views no longer show full path of modfolders (An item's full path can be viewed by holding the mouse over that item)
+- Major refactor of several function paths
 
 v1.2.2 - 2014-10-26
 - Added: Now searches one level down for modfolders in folders (Arma 3\@Mods\@JSRS), so you can declutter your Arma directory (Note: top folder must start with @)
