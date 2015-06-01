@@ -7,6 +7,8 @@
 
 		If dialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
 			txtPath.Text = dialog.FileName
+			Me.DialogResult = DialogResult.OK
+			Me.Close()
 		End If
 	End Sub
 End Class

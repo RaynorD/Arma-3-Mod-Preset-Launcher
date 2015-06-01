@@ -374,11 +374,11 @@ Public Class frmMain
 		If (File.Exists(steamPath + "\steamapps\common\Arma 3\arma3.exe")) Then	'return path and skip input dialog
 			path = steamPath + "\steamapps\common\Arma 3\" + getExecutable()
 
-			MessageBox.Show(
-			  "Detected Arma 3 Installation at:" + vbCrLf + vbCrLf + path + vbCrLf + vbCrLf + "Loading mods...",
-			  "Found Arma 3 Installation",
-			  MessageBoxButtons.OK,
-			  MessageBoxIcon.Information)
+			'MessageBox.Show(
+			'  "Detected Arma 3 Installation at:" + vbCrLf + vbCrLf + path + vbCrLf + vbCrLf + "Loading mods...",
+			'  "Found Arma 3 Installation",
+			'  MessageBoxButtons.OK,
+			'  MessageBoxIcon.Information)
 
 			Return path
 		End If
@@ -397,11 +397,11 @@ Public Class frmMain
 			If inputPath = DialogResult.OK Then	'Clicked OK
 				If foundFile(pathInput.txtPath.Text, "arma3.exe") Then
 					path = pathInput.txtPath.Text.Replace("/", "\")
-					MessageBox.Show(
-					  "Found Arma 3 Installation at:" + vbCrLf + vbCrLf + path + vbCrLf + vbCrLf + "Loading mods...",
-					  "Found Arma 3 Installation",
-					  MessageBoxButtons.OK,
-					  MessageBoxIcon.Information)
+					'MessageBox.Show(
+					'  "Found Arma 3 Installation at:" + vbCrLf + vbCrLf + path + vbCrLf + vbCrLf + "Loading mods...",
+					'  "Found Arma 3 Installation",
+					'  MessageBoxButtons.OK,
+					'  MessageBoxIcon.Information)
 
 					valid = 1
 					'My.Settings.Save()
@@ -418,7 +418,7 @@ Public Class frmMain
 
 	Private Function relocateA3()
 		Dim oldLabel As String = pathInput.lblPath.Text	 '* Lol, this is terrible, don't do this
-		pathInput.lblPath.Text = "Arma3.exe could not be found at the saved location. Please browse to or paste its location."
+		pathInput.lblPath.Text = "Arma3.exe could not be found at the previous location. Please browse to or paste its location."
 		Dim path As String = locateA3()
 		pathInput.lblPath.Text = oldLabel '*
 		setStatus("Found Arma 3", True)
@@ -1603,7 +1603,7 @@ Public Class frmMain
 	End Sub
 
 	Private Sub ResetSettingsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ResetSettingsToolStripMenuItem.Click
-		Dim dialog = MessageBox.Show("Warning: This cannot be undone!", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation)
+		Dim dialog = MessageBox.Show("Warning: This will erase all user settings and cannot be reversed!" + vbCrLf + vbCrLf + "The launcher will reset all settings and exit.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
 		If dialog = DialogResult.OK Then
 			My.Settings.Reset()
 			My.Settings.Save()
