@@ -90,7 +90,7 @@ Partial Class dlgAbout
 		Me.Label2.Name = "Label2"
 		Me.Label2.Size = New System.Drawing.Size(255, 30)
 		Me.Label2.TabIndex = 7
-		Me.Label2.Text = "Created by =7Cav=WOC.Raynor.D"
+		Me.Label2.Text = "Created by =7Cav=WO1.Raynor.D"
 		Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'Label1
@@ -110,9 +110,9 @@ Partial Class dlgAbout
 		Me.Label3.ForeColor = System.Drawing.Color.White
 		Me.Label3.Location = New System.Drawing.Point(7, 125)
 		Me.Label3.Name = "Label3"
-		Me.Label3.Size = New System.Drawing.Size(66, 26)
+		Me.Label3.Size = New System.Drawing.Size(67, 26)
 		Me.Label3.TabIndex = 4
-		Me.Label3.Text = "v1.2.3" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "09 Jan 2015"
+		Me.Label3.Text = "v1.2.3 Beta" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "01 Jun 2015"
 		Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'dlgAbout

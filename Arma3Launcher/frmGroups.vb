@@ -234,17 +234,18 @@ Public Class frmGroups
 
 	' ================================= REORDER CURRENT MODS =====================================
 
-	Private Sub ctrlArrowKey(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvModsCurrent.KeyDown
-		If e.Modifiers = Keys.Control Then
-			If e.KeyCode = Keys.Up Then
-				moveSelectedItemUp()
-			ElseIf e.KeyCode = Keys.Down Then
-				moveSelectedItemUp()
-			End If
-		End If
-	End Sub
 
-	Private Sub btnUp_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles btnUp.MouseUp
+	'Private Sub ctrlArrowKey(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles lvModsCurrent.KeyDown
+	'	If e.Modifiers = Keys.Control Then
+	'		If e.KeyCode = Keys.Up Then
+	'			moveSelectedItemUp()
+	'		ElseIf e.KeyCode = Keys.Down Then
+	'			moveSelectedItemUp()
+	'		End If
+	'	End If
+	'End Sub
+
+	Private Sub btnUp_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
 		moveSelectedItemUp()
 	End Sub
 
@@ -276,7 +277,7 @@ Public Class frmGroups
 		End If
 	End Sub
 
-	Private Sub btnDown_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles btnDown.MouseUp
+	Private Sub btnDown_Click(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
 		moveSelectedItemDown()
 	End Sub
 
@@ -380,6 +381,7 @@ Public Class frmGroups
 			lvModsCurrent.FindItemWithText(m.text, True, 0).Selected = True
 		Next
 
+		lvModsCurrent.Columns.Item(0).AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
 		updateColors()
 	End Sub
 

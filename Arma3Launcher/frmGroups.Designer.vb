@@ -36,8 +36,6 @@ Partial Class frmGroups
 		Me.lvModsAll = New System.Windows.Forms.ListView()
 		Me.colModsAll = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
 		Me.btnOK = New System.Windows.Forms.Button()
-		Me.btnDown = New System.Windows.Forms.Button()
-		Me.btnUp = New System.Windows.Forms.Button()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
 		Me.Panel1 = New System.Windows.Forms.Panel()
 		Me.GroupBox3.SuspendLayout()
@@ -199,28 +197,6 @@ Partial Class frmGroups
 		Me.btnOK.Text = "OK"
 		Me.btnOK.UseVisualStyleBackColor = True
 		'
-		'btnDown
-		'
-		Me.btnDown.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.btnDown.Image = Global.Arma3ModPresetLauncher.My.Resources.Resources.down_arrow_16px
-		Me.btnDown.Location = New System.Drawing.Point(6, 6)
-		Me.btnDown.Name = "btnDown"
-		Me.btnDown.Size = New System.Drawing.Size(28, 32)
-		Me.btnDown.TabIndex = 11
-		Me.btnDown.UseVisualStyleBackColor = True
-		Me.btnDown.Visible = False
-		'
-		'btnUp
-		'
-		Me.btnUp.Anchor = System.Windows.Forms.AnchorStyles.Top
-		Me.btnUp.Image = Global.Arma3ModPresetLauncher.My.Resources.Resources.up_arrow_16px
-		Me.btnUp.Location = New System.Drawing.Point(40, 6)
-		Me.btnUp.Name = "btnUp"
-		Me.btnUp.Size = New System.Drawing.Size(28, 32)
-		Me.btnUp.TabIndex = 10
-		Me.btnUp.UseVisualStyleBackColor = True
-		Me.btnUp.Visible = False
-		'
 		'TableLayoutPanel1
 		'
 		Me.TableLayoutPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -245,8 +221,6 @@ Partial Class frmGroups
 		Me.Panel1.Controls.Add(Me.btnOK)
 		Me.Panel1.Controls.Add(Me.btnRemove)
 		Me.Panel1.Controls.Add(Me.btnAdd)
-		Me.Panel1.Controls.Add(Me.btnDown)
-		Me.Panel1.Controls.Add(Me.btnUp)
 		Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.Panel1.Location = New System.Drawing.Point(186, 0)
 		Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
@@ -282,8 +256,6 @@ Partial Class frmGroups
 
 	End Sub
 	Friend WithEvents btnRename As System.Windows.Forms.Button
-	Friend WithEvents btnDown As System.Windows.Forms.Button
-	Friend WithEvents btnUp As System.Windows.Forms.Button
 	Friend WithEvents cmbGroup As System.Windows.Forms.ComboBox
 	Friend WithEvents btnRemove As System.Windows.Forms.Button
 	Friend WithEvents btnNew As System.Windows.Forms.Button

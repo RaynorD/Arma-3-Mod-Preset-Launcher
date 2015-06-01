@@ -477,6 +477,7 @@ Public Class frmMain
 				For Each group In My.Settings.GroupList
 					Dim groupName = getGroupNameFromString(group)
 					Dim item = lvModsAll.Items.Add(groupName)
+					item.Tag = groupName
 				Next
 			End If
 		End If
