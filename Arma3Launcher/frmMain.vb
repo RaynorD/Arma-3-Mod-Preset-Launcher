@@ -12,7 +12,7 @@ Public Class frmMain
 
 	'Constants
 	Protected Friend ReadOnly activeColor As Integer = 160 'Gray highlight brightness (0-255)
-	Protected Friend ReadOnly frmMainDefaultSize = New Size(423, 440)
+	Protected Friend ReadOnly frmMainDefaultSize = New Size(423, 430)
 
 	Private dragger As DragManager
 
