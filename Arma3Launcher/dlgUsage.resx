@@ -119,7 +119,7 @@
   </resheader>
   <data name="Label1.Text" xml:space="preserve">
     <value>Double click a mod to move it in or out of the current preset.
-In the current preset, click and drag to reorder mods. (Note this has no known effect in Arma)
+In the current preset, click and drag to reorder mods. (Note: this has no known effect in Arma)
 
 To add/remove multiple mods, Ctrl or Shift click to select multiple items, then use the add/remove buttons.
 
@@ -136,7 +136,9 @@ What the list colors mean:
     <value>You can organize sub-modfolders in the Arma 3 directory, and the launcher will still find them, if the top folder starts with a @ symbol.
 For example, you can do "Arma 3\@Mods\@JSRS" and JSRS will show up in the launcher.
 
-In "Options &gt; Modfolder Locations...", you can specify additional folders to search for modfolders, even on other hard drives! You can have as many additional locations as you want, and you can enable and disable them at will.</value>
+In "Options &gt; Modfolder Locations...", you can specify additional folders to search for modfolders, even on other hard drives! You can have as many additional locations as you want, and you can enable and disable them at will.
+
+Hover over a folder in the modfolder list to see its complete path.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

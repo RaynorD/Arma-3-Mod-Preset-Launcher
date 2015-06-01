@@ -725,7 +725,7 @@ Partial Class frmMain
 		'
 		'ToolStripDropDownButton3
 		'
-		Me.ToolStripDropDownButton3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsiSetAltLoc, Me.tsiRunBattlEye, Me.tsiRunThroughSteam, Me.ToolStripSeparator1, Me.MemoryAllocatorToolStripMenuItem, Me.ResetSettingsToolStripMenuItem})
+		Me.ToolStripDropDownButton3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsiSetAltLoc, Me.tsiRunBattlEye, Me.tsiRunThroughSteam, Me.MemoryAllocatorToolStripMenuItem, Me.ToolStripSeparator1, Me.ResetSettingsToolStripMenuItem})
 		Me.ToolStripDropDownButton3.Image = Global.Arma3ModPresetLauncher.My.Resources.Resources.options_16px
 		Me.ToolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.ToolStripDropDownButton3.Name = "ToolStripDropDownButton3"

@@ -54,7 +54,7 @@ Partial Class dlgUsage
 		'btnOk
 		'
 		Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-		Me.btnOk.Location = New System.Drawing.Point(226, 412)
+		Me.btnOk.Location = New System.Drawing.Point(226, 441)
 		Me.btnOk.Name = "btnOk"
 		Me.btnOk.Size = New System.Drawing.Size(75, 23)
 		Me.btnOk.TabIndex = 1
@@ -182,7 +182,7 @@ Partial Class dlgUsage
 		Me.Panel1.Controls.Add(Me.Label4)
 		Me.Panel1.Location = New System.Drawing.Point(-1, -1)
 		Me.Panel1.Name = "Panel1"
-		Me.Panel1.Size = New System.Drawing.Size(528, 407)
+		Me.Panel1.Size = New System.Drawing.Size(528, 436)
 		Me.Panel1.TabIndex = 12
 		'
 		'Label12
@@ -192,7 +192,7 @@ Partial Class dlgUsage
 		Me.Label12.BackColor = System.Drawing.Color.Transparent
 		Me.Label12.Location = New System.Drawing.Point(7, 301)
 		Me.Label12.Name = "Label12"
-		Me.Label12.Size = New System.Drawing.Size(502, 99)
+		Me.Label12.Size = New System.Drawing.Size(502, 123)
 		Me.Label12.TabIndex = 12
 		Me.Label12.Text = resources.GetString("Label12.Text")
 		'
@@ -202,7 +202,7 @@ Partial Class dlgUsage
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
-		Me.ClientSize = New System.Drawing.Size(526, 441)
+		Me.ClientSize = New System.Drawing.Size(526, 470)
 		Me.Controls.Add(Me.btnOk)
 		Me.Controls.Add(Me.Panel1)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
