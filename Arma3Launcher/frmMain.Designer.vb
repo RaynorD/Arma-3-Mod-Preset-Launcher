@@ -76,16 +76,12 @@ Partial Class frmMain
 		Me.btnRefresh = New System.Windows.Forms.ToolStripButton()
 		Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.OnDesktopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.InStartMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ChooseLocationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.InSteamLibraryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripDropDownButton3 = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.tsiSetAltLoc = New System.Windows.Forms.ToolStripMenuItem()
 		Me.tsiRunBattlEye = New System.Windows.Forms.ToolStripMenuItem()
 		Me.tsiRunThroughSteam = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-		Me.MemoryAllocatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.NoneToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ResetSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripDropDownButton2 = New System.Windows.Forms.ToolStripDropDownButton()
 		Me.tsbUsage = New System.Windows.Forms.ToolStripMenuItem()
@@ -689,7 +685,7 @@ Partial Class frmMain
 		'
 		'ToolStripDropDownButton1
 		'
-		Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnDesktopToolStripMenuItem, Me.InStartMenuToolStripMenuItem, Me.ChooseLocationToolStripMenuItem, Me.InSteamLibraryToolStripMenuItem})
+		Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OnDesktopToolStripMenuItem, Me.ChooseLocationToolStripMenuItem})
 		Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
 		Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
@@ -703,29 +699,15 @@ Partial Class frmMain
 		Me.OnDesktopToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
 		Me.OnDesktopToolStripMenuItem.Text = "On Desktop..."
 		'
-		'InStartMenuToolStripMenuItem
-		'
-		Me.InStartMenuToolStripMenuItem.Name = "InStartMenuToolStripMenuItem"
-		Me.InStartMenuToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
-		Me.InStartMenuToolStripMenuItem.Text = "In Start Menu..."
-		Me.InStartMenuToolStripMenuItem.Visible = False
-		'
 		'ChooseLocationToolStripMenuItem
 		'
 		Me.ChooseLocationToolStripMenuItem.Name = "ChooseLocationToolStripMenuItem"
 		Me.ChooseLocationToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
 		Me.ChooseLocationToolStripMenuItem.Text = "Choose Location..."
 		'
-		'InSteamLibraryToolStripMenuItem
-		'
-		Me.InSteamLibraryToolStripMenuItem.Name = "InSteamLibraryToolStripMenuItem"
-		Me.InSteamLibraryToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
-		Me.InSteamLibraryToolStripMenuItem.Text = "In Steam Library..."
-		Me.InSteamLibraryToolStripMenuItem.Visible = False
-		'
 		'ToolStripDropDownButton3
 		'
-		Me.ToolStripDropDownButton3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsiSetAltLoc, Me.tsiRunBattlEye, Me.tsiRunThroughSteam, Me.MemoryAllocatorToolStripMenuItem, Me.ToolStripSeparator1, Me.ResetSettingsToolStripMenuItem})
+		Me.ToolStripDropDownButton3.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsiSetAltLoc, Me.tsiRunBattlEye, Me.tsiRunThroughSteam, Me.ToolStripSeparator1, Me.ResetSettingsToolStripMenuItem})
 		Me.ToolStripDropDownButton3.Image = Global.Arma3ModPresetLauncher.My.Resources.Resources.options_16px
 		Me.ToolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.ToolStripDropDownButton3.Name = "ToolStripDropDownButton3"
@@ -760,19 +742,6 @@ Partial Class frmMain
 		'
 		Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
 		Me.ToolStripSeparator1.Size = New System.Drawing.Size(190, 6)
-		'
-		'MemoryAllocatorToolStripMenuItem
-		'
-		Me.MemoryAllocatorToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NoneToolStripMenuItem})
-		Me.MemoryAllocatorToolStripMenuItem.Name = "MemoryAllocatorToolStripMenuItem"
-		Me.MemoryAllocatorToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-		Me.MemoryAllocatorToolStripMenuItem.Text = "Memory Allocator"
-		'
-		'NoneToolStripMenuItem
-		'
-		Me.NoneToolStripMenuItem.Name = "NoneToolStripMenuItem"
-		Me.NoneToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
-		Me.NoneToolStripMenuItem.Text = "None"
 		'
 		'ResetSettingsToolStripMenuItem
 		'
@@ -875,7 +844,7 @@ Partial Class frmMain
 		Me.tabParameters.Location = New System.Drawing.Point(4, 22)
 		Me.tabParameters.Name = "tabParameters"
 		Me.tabParameters.Padding = New System.Windows.Forms.Padding(3)
-		Me.tabParameters.Size = New System.Drawing.Size(398, 38)
+		Me.tabParameters.Size = New System.Drawing.Size(398, 275)
 		Me.tabParameters.TabIndex = 1
 		Me.tabParameters.Text = "Parameters"
 		'
@@ -954,8 +923,6 @@ Partial Class frmMain
 	Friend WithEvents colModsCurrent As System.Windows.Forms.ColumnHeader
 	Friend WithEvents lvModsAll As System.Windows.Forms.ListView
 	Friend WithEvents colModsAll As System.Windows.Forms.ColumnHeader
-	Friend WithEvents InStartMenuToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents InSteamLibraryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents btnGroups As System.Windows.Forms.Button
 	Friend WithEvents chkExThreads As System.Windows.Forms.CheckBox
 	Friend WithEvents lblExThreads As System.Windows.Forms.Label
@@ -984,8 +951,6 @@ Partial Class frmMain
 	Friend WithEvents chkCustomArguments As System.Windows.Forms.CheckBox
 	Friend WithEvents tsiRunThroughSteam As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents MemoryAllocatorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents NoneToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents tabPanel As System.Windows.Forms.TabControl
 	Friend WithEvents tabModPresets As System.Windows.Forms.TabPage
 	Friend WithEvents tabParameters As System.Windows.Forms.TabPage
