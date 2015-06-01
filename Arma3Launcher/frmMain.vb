@@ -316,7 +316,7 @@ Public Class frmMain
 			Dim index = cmbCustomMemoryAllocator.FindStringExact(My.Settings.CustomMemoryAllocator)
 
 			If index = -1 Then
-				MessageBox.Show("Warning: Your saved custom memory allocator no longer exists in Arma 3\Dll!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+				'MessageBox.Show("Warning: Your saved custom memory allocator no longer exists in Arma 3\Dll!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				cmbCustomMemoryAllocator.SelectedIndex = 0
 			Else
 				cmbCustomMemoryAllocator.SelectedIndex = index
@@ -341,7 +341,7 @@ Public Class frmMain
 			Dim index = cmbProfileName.FindStringExact(My.Settings.ProfileName)
 
 			If index = -1 Then
-				MessageBox.Show("Warning: Your saved profile no longer exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+				'MessageBox.Show("Warning: Your saved profile no longer exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				cmbProfileName.SelectedIndex = 0
 			Else
 				cmbProfileName.SelectedIndex = index
@@ -768,7 +768,7 @@ Public Class frmMain
 
 	' ================== UPDATE LAUNCH STRING =========================
 
-	Private Sub updateLaunchStringAndColors()
+	Private Function getLaunchArguments() As NameValueCollection
 		'Console.WriteLine("updateLaunchStringAndColors()")
 		Dim launchParams As New ArrayList()
 		Dim modArray As New ArrayList
@@ -782,8 +782,6 @@ Public Class frmMain
 				launchParams.Add("-useBE")
 			End If
 		End If
-
-		
 
 		If (lvModsCurrent.Items.Count > 0 And lvModsCurrent.Items.IndexOfKey("") <> 0) Then
 			For Each item As ListViewItem In lvModsCurrent.Items
@@ -884,13 +882,33 @@ Public Class frmMain
 
 		launchString = String.Join(" ", launchParams.ToArray)
 
+		Dim args As New NameValueCollection
+		'0: Working directory
+		'1: File Name
+		'2: Arguments
+
 		If My.Settings.RunThroughSteam Then
-			txtLaunchString.Text = steamExe + " -applaunch 107410 "
+			args.Add("WorkingDirectory", steamExe.Substring(0, steamExe.LastIndexOf("\")))
+			args.Add("FileName", "steam.exe")
+			args.Add("Arguments", "-applaunch 107410 " + launchString)
 		Else
-			txtLaunchString.Text = My.Settings.A3Path + " "
+			args.Add("WorkingDirectory", My.Settings.A3Path.Substring(0, My.Settings.A3Path.LastIndexOf("\")))
+			args.Add("FileName", getExecutable())
+			If My.Settings.RunBattlEye Then
+				args.Add("Arguments", "0 1 " + launchString)
+			Else
+				args.Add("Arguments", launchString)
+			End If
 		End If
 
-		txtLaunchString.Text += launchString
+		Return args
+	End Function
+
+	Private Sub updateLaunchStringAndColors()
+		Dim args As NameValueCollection = getLaunchArguments()
+
+		txtLaunchString.Text = args.Get("WorkingDirectory") + "\" + args.Get("FileName") + " " + args.Get("Arguments")
+
 		ResetListViewColumnWidths()
 	End Sub
 
@@ -1306,6 +1324,8 @@ Public Class frmMain
 		checkForMissingMods()
 	End Sub
 
+	
+
 	Private Sub btnLaunch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLaunch.Click
 		savePresets()
 		setStatus("Launching with preset: " + cmbPreset.SelectedItem, True)
@@ -1315,12 +1335,15 @@ Public Class frmMain
 		'p.StartInfo.WorkingDirectory = My.Settings.A3Path.Substring(0, My.Settings.A3Path.LastIndexOf("\"))
 
 		Console.WriteLine("Launch")
-		p.StartInfo.WorkingDirectory = steamExe.Substring(0, steamExe.LastIndexOf("\"))
-		Console.WriteLine("Working Directory: " + steamExe.Substring(0, steamExe.LastIndexOf("\")))
-		p.StartInfo.FileName = "steam.exe"
-		Console.WriteLine("FileName: " + "steam.exe")
-		p.StartInfo.Arguments = "-applaunch 107410 " + launchString
-		Console.WriteLine("Arguments: " + "-applaunch 107410 " + launchString)
+
+		Dim args As NameValueCollection = getLaunchArguments()
+		p.StartInfo.WorkingDirectory = args.Get("WorkingDirectory")
+		p.StartInfo.FileName = args.Get("FileName")
+		p.StartInfo.Arguments = args.Get("Arguments")
+
+		Console.WriteLine("Working Directory: " + p.StartInfo.WorkingDirectory)
+		Console.WriteLine("FileName: " + p.StartInfo.FileName)
+		Console.WriteLine("Arguments: " + p.StartInfo.Arguments)
 		p.Start()
 		'Process.Start(txtLaunchString.Text.Substring(0, txtLaunchString.Text.IndexOf(" -mod")), txtLaunchString.Text.Substring(txtLaunchString.Text.IndexOf(" -mod")))
 
