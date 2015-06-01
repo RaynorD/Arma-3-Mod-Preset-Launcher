@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Windows.Forms.ListBox
 Imports Arma3ModPresetLauncher.DragManager
+Imports Microsoft.VisualBasic.FileIO
 
 Public Class frmMain
 	Protected Friend modAllList As New ArrayList()
@@ -502,7 +503,7 @@ Public Class frmMain
 			If modfolderName.Contains("\") Then
 				modfolderName = trimToFolderName(modfolder)
 			End If
-			
+
 			Dim listItem = lvModsAll.Items.Add(modfolderName)
 			listItem.Tag = modfolder
 		Next
@@ -1324,7 +1325,7 @@ Public Class frmMain
 		checkForMissingMods()
 	End Sub
 
-	
+
 
 	Private Sub btnLaunch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLaunch.Click
 		savePresets()
@@ -1471,64 +1472,58 @@ Public Class frmMain
 	'===================================================================================
 
 	Private Sub OnDesktopToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OnDesktopToolStripMenuItem.Click
-		Dim wsh As Object = CreateObject("WScript.Shell")
-		Dim desktopPath = wsh.SpecialFolders("Desktop")
-		Dim shortcutName As String
+		Dim desktopPath As String = SpecialDirectories.Desktop
+		Dim name As String = ""
 
 		If IsNothing(cmbPreset.SelectedItem) Then
-			shortcutName = "Arma 3 with Parameters"
+			name = "Arma 3 with Parameters"
 		Else
-			shortcutName = cmbPreset.SelectedItem
+			name = cmbPreset.SelectedItem
 		End If
 
-		Dim shortcut = wsh.CreateShortcut(desktopPath + "\" + shortcutName + ".lnk")
+		Dim shortcutPath = desktopPath + "\" + name + ".lnk"
+		createShortcut(shortcutPath)
+	End Sub
 
-		shortcut.TargetPath = wsh.ExpandEnvironmentStrings("""" + My.Settings.A3Path + """")
-		shortcut.Arguments = wsh.ExpandEnvironmentStrings(launchString)
-		shortcut.WorkingDirectory = My.Settings.A3Path.Substring(0, My.Settings.A3Path.LastIndexOf("\"))
+	Private Sub ChooseLocationToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChooseLocationToolStripMenuItem.Click
+		Dim dialog As New SaveFileDialog
+		dialog.Filter = ".lnk files (*.lnk)|*.lnk|All Files (*.*)|*.*"
+		Dim name As String
+
+		If IsNothing(cmbPreset.SelectedItem) Then
+			name = "Arma 3 with Parameters"
+		Else
+			name = cmbPreset.SelectedItem
+		End If
+
+		dialog.FileName = name + ".lnk"
+		Dim result = dialog.ShowDialog()
+
+		If result = DialogResult.OK Then
+			Dim path As String = dialog.FileName
+
+			createShortcut(path)
+		Else
+			setStatus("Shortcut creation canceled", True)
+		End If
+	End Sub
+
+	Private Sub createShortcut(ByVal path)
+		Dim wsh As Object = CreateObject("WScript.Shell")
+
+		Dim shortcut = wsh.CreateShortcut(path)
+
+		Dim args As NameValueCollection = getLaunchArguments()
+
+		shortcut.WorkingDirectory = args.Get("WorkingDirectory")
+		shortcut.TargetPath = args.Get("WorkingDirectory") + "\" + args.Get("FileName")
+		shortcut.Arguments = args.Get("Arguments")
 
 		shortcut.IconLocation = wsh.ExpandEnvironmentStrings(My.Settings.A3Path)
 		shortcut.WindowStyle = 4
 
 		shortcut.save()
 		setStatus("Shortcut of preset " + cmbPreset.SelectedItem + " created", True)
-	End Sub
-
-	Private Sub ChooseLocationToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChooseLocationToolStripMenuItem.Click
-		Dim dialog As New SaveFileDialog
-		dialog.Filter = ".lnk files (*.lnk)|*.lnk|All Files (*.*)|*.*"
-		Dim shortcutName As String
-
-		If IsNothing(cmbPreset.SelectedItem) Then
-			shortcutName = "Arma 3 with Parameters"
-		Else
-			shortcutName = cmbPreset.SelectedItem
-		End If
-
-		dialog.FileName = shortcutName + ".lnk"
-		Dim result = dialog.ShowDialog()
-		Dim path As String
-		If result = DialogResult.OK Then
-			path = dialog.FileName
-
-			Dim wsh As Object = CreateObject("WScript.Shell")
-			Dim desktopPath = wsh.SpecialFolders("Desktop")
-			Dim shortcut = wsh.CreateShortcut(path)
-
-			shortcut.TargetPath = wsh.ExpandEnvironmentStrings("""" + My.Settings.A3Path + """")
-			shortcut.Arguments = wsh.ExpandEnvironmentStrings(launchString)
-			Dim workingDirPath As String = My.Settings.A3Path.Substring(0, My.Settings.A3Path.LastIndexOf("\"))
-			shortcut.WorkingDirectory = workingDirPath
-
-
-			shortcut.IconLocation = wsh.ExpandEnvironmentStrings(My.Settings.A3Path)
-			shortcut.WindowStyle = 4
-
-			shortcut.save()
-			setStatus("Shortcut of preset " + cmbPreset.SelectedItem + " created", True)
-		Else
-			setStatus("Shortcut creation canceled", True)
-		End If
 	End Sub
 
 	Private Sub tsbAbout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbAbout.Click
