@@ -112,7 +112,7 @@ Partial Class dlgAbout
 		Me.Label3.Name = "Label3"
 		Me.Label3.Size = New System.Drawing.Size(67, 26)
 		Me.Label3.TabIndex = 4
-		Me.Label3.Text = "v1.2.3 Beta" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "06 Jun 2015"
+		Me.Label3.Text = "v1.3.0" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "06 Jun 2015"
 		Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'dlgAbout

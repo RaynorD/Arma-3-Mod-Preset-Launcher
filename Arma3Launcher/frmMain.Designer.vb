@@ -864,7 +864,7 @@ Partial Class frmMain
 		Me.MinimumSize = New System.Drawing.Size(423, 187)
 		Me.Name = "frmMain"
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-		Me.Text = "Arma 3 Mod Preset Launcher - v1.2.3 Beta"
+		Me.Text = "Arma 3 Mod Preset Launcher - v1.3.0"
 		Me.TableLayoutPanel1.ResumeLayout(False)
 		Me.Panel1.ResumeLayout(False)
 		Me.gbCurrent.ResumeLayout(False)
