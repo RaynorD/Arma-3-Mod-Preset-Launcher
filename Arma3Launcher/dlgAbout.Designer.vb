@@ -24,10 +24,10 @@ Partial Class dlgAbout
     Private Sub InitializeComponent()
 		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAbout))
 		Me.Panel1 = New System.Windows.Forms.Panel()
+		Me.Label1 = New System.Windows.Forms.Label()
 		Me.linkCav = New System.Windows.Forms.LinkLabel()
 		Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
 		Me.Label2 = New System.Windows.Forms.Label()
-		Me.Label1 = New System.Windows.Forms.Label()
 		Me.Label3 = New System.Windows.Forms.Label()
 		Me.Panel1.SuspendLayout()
 		Me.SuspendLayout()
@@ -39,16 +39,26 @@ Partial Class dlgAbout
 					Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
 		Me.Panel1.BackColor = System.Drawing.Color.Transparent
 		Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)
+		Me.Panel1.Controls.Add(Me.Label1)
 		Me.Panel1.Controls.Add(Me.linkCav)
 		Me.Panel1.Controls.Add(Me.LinkLabel1)
 		Me.Panel1.Controls.Add(Me.Label2)
-		Me.Panel1.Controls.Add(Me.Label1)
 		Me.Panel1.Controls.Add(Me.Label3)
 		Me.Panel1.ForeColor = System.Drawing.Color.Transparent
 		Me.Panel1.Location = New System.Drawing.Point(0, 0)
 		Me.Panel1.Name = "Panel1"
 		Me.Panel1.Size = New System.Drawing.Size(277, 160)
 		Me.Panel1.TabIndex = 4
+		'
+		'Label1
+		'
+		Me.Label1.ForeColor = System.Drawing.Color.White
+		Me.Label1.Location = New System.Drawing.Point(1, 36)
+		Me.Label1.Name = "Label1"
+		Me.Label1.Size = New System.Drawing.Size(275, 34)
+		Me.Label1.TabIndex = 6
+		Me.Label1.Text = "Have questions or comments about the launcher?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Drop me a PM at:"
+		Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'linkCav
 		'
@@ -93,16 +103,6 @@ Partial Class dlgAbout
 		Me.Label2.Text = "Created by =7Cav=WO1.Raynor.D"
 		Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
-		'Label1
-		'
-		Me.Label1.ForeColor = System.Drawing.Color.White
-		Me.Label1.Location = New System.Drawing.Point(1, 36)
-		Me.Label1.Name = "Label1"
-		Me.Label1.Size = New System.Drawing.Size(275, 34)
-		Me.Label1.TabIndex = 6
-		Me.Label1.Text = "Have questions or comments about the launcher?" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Drop me a PM at:"
-		Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
 		'Label3
 		'
 		Me.Label3.AutoSize = True
@@ -112,7 +112,7 @@ Partial Class dlgAbout
 		Me.Label3.Name = "Label3"
 		Me.Label3.Size = New System.Drawing.Size(67, 26)
 		Me.Label3.TabIndex = 4
-		Me.Label3.Text = "v1.2.3 Beta" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "01 Jun 2015"
+		Me.Label3.Text = "v1.2.3 Beta" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "06 Jun 2015"
 		Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'dlgAbout

@@ -220,16 +220,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\down_arrow_16px1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\up_arrow_16px1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\info_16px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Cav_Patch_100h_Shiny1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Refresh_16px1.png" />
