@@ -878,7 +878,7 @@ Public Class frmMain
 		End If
 
 		If My.Settings.ProfileNameEnabled Then
-			launchParams.Add("-name=""" + cmbProfileName.Text + """")
+			launchParams.Add("-name=" + cmbProfileName.Text)
 		End If
 
 		launchString = String.Join(" ", launchParams.ToArray)
