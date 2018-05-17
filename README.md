@@ -1,6 +1,11 @@
 # Arma 3 Mod Preset Launcher
 An intuitive, fully featured launcher for Arma 3
 
+# (DEPRECATED)
+Development has ended, and I recommend everyone switch over to the vanilla launcher at this point, as I have.
+
+This launcher was meant as a stopgap until if and when the BIS launcher matured. Not only has that happened, but it has many more features and options than I could possibly add to mine, like workshop support. So thanks for your guys' support in developing my launcher, it was a great learning experience, and a huge thank you to Bohemia for spending some quality time (believe me I know) to give us a great launcher.
+
 **Changelog**
 
 v1.2.3 - In development
